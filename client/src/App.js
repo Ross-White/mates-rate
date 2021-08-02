@@ -1,9 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
-    <h1 className="text-4xl text-bold text-green-300">Helloooo</h1>
+    <div className="grid grid-cols-3 m-4">
+      <div className="p-4 border flex justify-center col-span-3">
+        <h2 className="text-gray-500 text-bold text-xl">Trip name</h2>
+      </div>
+    </div>
   );
 }
 
