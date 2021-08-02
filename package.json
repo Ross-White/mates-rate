@@ -1,0 +1,19 @@
+{
+  "name": "mates-rate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/osaxon/mates-rate.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/osaxon/mates-rate/issues"
+  },
+  "homepage": "https://github.com/osaxon/mates-rate#readme"
+}
