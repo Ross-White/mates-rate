@@ -1,20 +1,4 @@
-// const { Schema, model } = require('mongoose');
+const typeDefs = require('./typeDefs');
+const resolvers = require('./resolvers');
 
-// const userSchema = new Schema({
-//   name: {
-//     type: String,
-//     required: true,
-//     unique: true,
-//     trim: true,
-//   },
-//   skills: [
-//     {
-//       type: String,
-//       trim: true,
-//     },
-//   ],
-// });
-
-// const User = model('User', userSchema);
-
-// module.exports = Profile;
+module.exports = { typeDefs, resolvers };
