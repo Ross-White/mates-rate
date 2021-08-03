@@ -1,0 +1,20 @@
+[
+    {
+        "destination": "Bucharest",
+        "startDate": "2021-10-29",
+        "itinerary": [
+            { 
+                "date": "2021-10-29",
+                "activity": "Flights to Bucharest"
+            },
+            { 
+                "date": "2021-10-30",
+                "activity": "Drinking"
+            },
+            { 
+                "date": "2021-10-31",
+                "activity": "Flights home"
+            }
+        ]
+    }
+]
