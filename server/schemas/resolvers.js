@@ -14,11 +14,14 @@ const resolvers = {
   },
 
   Mutation: {
+    addUser: async(parent, { name, email, password }) => {
+      return await User.create({ name, email, password });
+    },
     addTrip: async (parent, { organiser, destination, startDate }) => {
-      return Trip.create({ organiser, destination, startDate });
+      return await Trip.create({ organiser, destination, startDate });
     },
     addActivity: async (parent, { tripId, date, activity }) => {
-      return Trip.findByIdAndUpdate(
+      return await Trip.findByIdAndUpdate(
         { _id: tripId },
         {
           $addToSet: { itinerary: { date, activity }},
