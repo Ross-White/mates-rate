@@ -13,8 +13,8 @@ const typeDefs = gql`
     destination: String
     startDate: Float
     organiser: ID
-    # guests: []
     itinerary: [Activity]
+    guests: [User]
   }
 
   type Activity {
@@ -27,6 +27,11 @@ const typeDefs = gql`
   type Query {
     users: [User]
     trips: [Trip]
+  }
+
+  type Mutation {
+    addTrip(organiser: ID!, destination: String!, startDate: Float!): Trip
+    addActivity(tripId: ID!, date: Float!, activity: String!):Trip
   }
 `;
 
