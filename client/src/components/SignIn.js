@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { LOGIN_USER } from "../services/mutations";
-
-import Auth from "../services/auth";
+import { LOGIN_USER } from "../utils/mutations";
+import { Link } from 'react-router-dom';
+import Auth from "../utils/auth";
 import { useMutation } from "@apollo/client";
-import { Link } from "react-router-dom";
 
 export default function SignIn() {
   const [formState, setFormState] = useState({ email: "", password: "" });
@@ -38,13 +37,11 @@ export default function SignIn() {
       })
   };
 
-  const classes = useStyles();
-
   return (
-    <main className="flex-row justify-center mb-4">
-    <div className="col-12 col-lg-10">
-      <div className="card">
-        <h4 className="card-header bg-dark text-light p-2">Login</h4>
+    <main className="flex justify-center">
+    <div className="">
+      <div className="">
+        <h4 className="p-2">Login</h4>
         <div className="card-body">
           {data ? (
             <p>

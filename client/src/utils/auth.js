@@ -1,4 +1,3 @@
-import axios from "axios";
 import { decode } from "jsonwebtoken";
 
 const ID_TOKEN = 'id_token'
