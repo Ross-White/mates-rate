@@ -2,19 +2,25 @@
     {
         "destination": "Bucharest",
         "startDate": "2021-10-29",
-        "itinerary": [
-            { 
-                "date": "2021-10-29",
-                "activity": "Flights to Bucharest"
-            },
-            { 
-                "date": "2021-10-30",
-                "activity": "Drinking"
-            },
-            { 
-                "date": "2021-10-31",
-                "activity": "Flights home"
-            }
-        ]
+        "guests": [],
+        "itinerary": []
+    },
+    {
+        "destination": "Lisbon",
+        "startDate": "2022-07-21",
+        "guests": [],
+        "itinerary": []
+    },
+    {
+        "destination": "Edinburgh",
+        "startDate": "2021-12-30",
+        "guests": [],
+        "itinerary": []
+    },
+    {
+        "destination": "Los Angeles",
+        "startDate": "2022-08-12",
+        "guests": [],
+        "itinerary": []
     }
 ]
