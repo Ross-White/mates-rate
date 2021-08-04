@@ -21,7 +21,22 @@ const Signup = () => {
           ...formState,
           [name]: value,
         });
-      };
+    };
+
+    const handleFormSubmit = async (event) => {
+        event.preventDefault();
+        console.log(formState);
+    
+        try {
+          const { data } = await addProfile({
+            variables: { ...formState },
+          });
+    
+          Auth.login(data.addProfile.token);
+        } catch (e) {
+          console.error(e);
+        }
+    };
 
     return ();
   };
