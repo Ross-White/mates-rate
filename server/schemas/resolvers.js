@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User, Trip } = require('../models');
 
 // Create the functions that fulfill the queries defined in `typeDefs.js`
 const resolvers = {
@@ -6,8 +6,13 @@ const resolvers = {
     users: async () => {
       // Get and return all documents from the classes collection
       return await User.find({});
+    },
+
+    trips: async () => {
+      return await Trip.find({});
     }
-  }
+
+  },
 };
 
 module.exports = resolvers;
