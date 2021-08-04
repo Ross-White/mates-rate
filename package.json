@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/osaxon/mates-rate/issues"
   },
-  "homepage": "https://github.com/osaxon/mates-rate#readme"
+  "homepage": "https://github.com/osaxon/mates-rate#readme",
+  "dependencies": {
+    "jsonwebtoken": "^8.5.1"
+  }
 }
