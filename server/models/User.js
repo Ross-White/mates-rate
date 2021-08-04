@@ -14,7 +14,7 @@ const userSchema = new Schema({
     match: [/.+@.+\..+/, 'Must use a valid email address'],
   },
   password: {
-    typre: String,
+    type: String,
     required: true,
     validate: [({ length }) => length >= 8, "Password must be at least 8 characters."],
   }
