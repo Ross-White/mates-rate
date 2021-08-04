@@ -1,6 +1,7 @@
 import './App.css';
 import React, { useState } from 'react';
 import Form from './components/Form';
+import SignIn from './components/SignIn';
 
 function App() {
 
@@ -9,13 +10,7 @@ function App() {
 
   return (
     <div>
-      <Form onSubmit={text => setTodos([{text, complete: false }, ...toDos])}
-      />
-      <div>
-        {toDos.map(({ text }) => 
-        <div key={text}>{text}</div>
-        )}
-        </div>
+      <SignIn/>
     </div>
   )
 }
