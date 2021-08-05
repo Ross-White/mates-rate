@@ -23,10 +23,10 @@ const typeDefs = gql`
     activity: String
   }
 
-  # type Auth {
-  #   token: ID!
-  #   user: User
-  # }
+  type Auth {
+    token: ID!
+    user: User
+  }
 
   # Define which queries the front end is allowed to make and what data is returned
   type Query {
@@ -35,8 +35,8 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addUser(name: String!, email: String!, password: String!): User
-    login(email: String!, password: String!): User
+    addUser(name: String!, email: String!, password: String!): Auth
+    login(email: String!, password: String!): Auth
     addTrip(organiser: ID!, destination: String!, startDate: Float!): Trip
     addActivity(tripId: ID!, date: Float!, activity: String!):Trip
   }
