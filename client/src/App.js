@@ -10,12 +10,13 @@ import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 
-import Login from './components/SignIn';
-import Signup from './components/SignUp';
+import Login from './Pages/LogIn';
+import Signup from './Pages/SignUp';
+import Header from './components/Header';
 // import Signup from './components/SignUp';
 
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: 'http://localhost:3001/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -39,7 +40,8 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div className="flex-column justify-flex-start min-h-full">
+        <div className="flex-col justify-flex-start min-h-full">
+          <Header />
           <div className="container">
             <Route exact path="/login">
               <Login />
