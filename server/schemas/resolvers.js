@@ -35,7 +35,7 @@ const resolvers = {
       }
 
       const token = signToken(user);
-
+      console.log({ token, user })
       return { token, user };
     },
     addTrip: async (parent, { organiser, destination, startDate }) => {
