@@ -12,6 +12,10 @@ const resolvers = {
 
     trips: async () => {
       return await Trip.find({});
+    },
+
+    trip: async (parent, args) => {
+      return await Trip.findById(args._id)
     }
   },
 
@@ -49,6 +53,14 @@ const resolvers = {
         },
         {
           new: true
+        }
+      )
+    },
+    addUserToTrip: async(parent, { tripId, userId }) => {
+     return await Trip.findByIdAndUpdate(
+        { _id: tripId },
+        {
+          $addToSet: { guests: userId } 
         }
       )
     }
