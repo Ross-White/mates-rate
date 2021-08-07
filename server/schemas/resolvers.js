@@ -14,8 +14,8 @@ const resolvers = {
       return await Trip.find({});
     },
 
-    trip: async (parent, { thougtId }) => {
-      return await Trip.findOne({ _id: thougtId });
+    trip: async (parent, args) => {
+      return await Trip.findById( args.tripId );
     }
   },
 
