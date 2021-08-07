@@ -8,6 +8,10 @@ const TripList = () => {
     const { loading, data } = useQuery(QUERY_TRIPS)
     const trips = data?.trips || [];
 
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <div>
             {trips &&
@@ -19,7 +23,7 @@ const TripList = () => {
 
                     <Link
                         to={`trips/${trip._id}`}>
-                    View Trip
+                    View Trip Details
                     </ Link>
                 </div>
             ))}
