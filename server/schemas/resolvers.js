@@ -12,6 +12,10 @@ const resolvers = {
 
     trips: async () => {
       return await Trip.find({});
+    },
+
+    trip: async (parent, { thougtId }) => {
+      return await Trip.findOne({ _id: thougtId });
     }
   },
 
