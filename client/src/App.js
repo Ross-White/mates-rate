@@ -41,7 +41,7 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <Header />
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
+        <div className="mx-6 my-4 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
           <Route exact path="/">
             <Home />
           </Route>
