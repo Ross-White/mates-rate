@@ -12,6 +12,9 @@ const Home = () => {
                 <Link to="/plantrip">
                     Create new trip
                 </Link>
+                <Link to="/triplist">
+                    View Trips
+                </Link>
                 </>
             ) : (
                 <h1>You must log in first</h1>
