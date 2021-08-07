@@ -57,11 +57,12 @@ const resolvers = {
       )
     },
     addUserToTrip: async(parent, { tripId, userId }) => {
-     return await Trip.findByIdAndUpdate(
+     return await Trip.findOneAndUpdate(
         { _id: tripId },
         {
-          $addToSet: { guests: userId } 
-        }
+          $addToSet: { guests: { userId } } 
+        },
+        { new: true }
       )
     }
   }

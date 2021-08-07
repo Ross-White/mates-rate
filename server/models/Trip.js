@@ -32,6 +32,7 @@ const tripSchema = new Schema({
     ],
     guests: [{
         type: Schema.Types.ObjectId,
+        ref: "User"
     }]
 
 });
