@@ -16,7 +16,7 @@ import Home from "./Pages/Home";
 import PlanTrip from "./Pages/PlanTrip";
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:3001/graphql",
+  uri: '/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {
