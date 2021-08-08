@@ -32,7 +32,7 @@ const typeDefs = gql`
   type Query {
     users: [User]
     trips: [Trip]
-    trip(_id: String): Trip
+    trip(tripId: ID!): Trip
   }
 
   type Mutation {
@@ -40,7 +40,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     addTrip(organiser: ID!, destination: String!, startDate: Float!): Trip
     addActivity(tripId: ID!, date: Float!, activity: String!): Trip
-    addUserToTrip(tripId: ID!, guests: String!): Trip
+    addUserToTrip(tripId: ID!, guests: ID!): Trip
   }
 `;
 
