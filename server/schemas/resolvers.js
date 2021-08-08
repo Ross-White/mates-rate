@@ -7,11 +7,15 @@ const resolvers = {
   Query: {
     users: async () => {
       // Get and return all documents from the classes collection
-      return await User.find({});
+      return await User.find({}).populate('trips');
     },
 
-    trips: async () => {
-      return await Trip.find({});
+    trips: async (parent, args, context) => {
+      console.log(context.user);
+      if (context.user) {
+      return await User.findById(context.user._id).populate('trips');
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
 
     trip: async (parent, args) => {
@@ -39,7 +43,6 @@ const resolvers = {
       }
 
       const token = signToken(user);
-      console.log({ token, user })
       return { token, user };
     },
     addTrip: async (parent, { organiser, destination, startDate }) => {

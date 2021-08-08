@@ -6,6 +6,7 @@ const typeDefs = gql`
     name: String
     email: String
     password: String
+    trips: [Trip]
   }
 
   type Trip {
@@ -31,7 +32,7 @@ const typeDefs = gql`
   # Define which queries the front end is allowed to make and what data is returned
   type Query {
     users: [User]
-    trips: [Trip]
+    trips: User
     trip(tripId: ID!): Trip
   }
 

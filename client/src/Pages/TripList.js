@@ -6,7 +6,8 @@ import { Link } from 'react-router-dom';
 
 const TripList = () => {
     const { loading, data } = useQuery(QUERY_TRIPS)
-    const trips = data?.trips || [];
+    const user = data?.user || [];
+    console.log(user)
 
     if (loading) {
         return <div>Loading...</div>;
@@ -14,7 +15,8 @@ const TripList = () => {
 
     return (
         <div>
-            {trips &&
+            <h1>{user.name}</h1>
+            {/* {trips &&
             trips.map((trip) => (
                 <div key={trip._id} className="">
                     <h4 className="">{trip.destination}</h4>
@@ -26,7 +28,7 @@ const TripList = () => {
                     View Trip Details
                     </ Link>
                 </div>
-            ))}
+            ))} */}
         </div>
     );
 };
