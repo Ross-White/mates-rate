@@ -24,11 +24,15 @@ const tripSchema = new Schema({
             activity: {
                 type: String,
                 required: true,
+            },
+            location: {
+                type: String,
             }
         }
     ],
     guests: [{
         type: Schema.Types.ObjectId,
+        ref: "User"
     }]
 
 });
