@@ -7,13 +7,14 @@ import { Link } from 'react-router-dom';
 const TripList = () => {
     const { loading, data } = useQuery(QUERY_USER_TRIPS)
     const user = data;
+    if (loading) {
+        return <div>Loading...</div>;
+    }
     if (!user) {
         console.log("no data found")
     }
     const trips = user.userTrips.trips;
-    if (loading) {
-        return <div>Loading...</div>;
-    }
+
 
     return (
         <div>
