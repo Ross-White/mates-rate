@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const userSchema = new Schema({
   name: {
     type: String,
-    required: true,
+    //required: true,
     unique: true,
     trim: true,
   },
@@ -18,7 +18,11 @@ const userSchema = new Schema({
     type: String,
     required: true,
     validate: [({ length }) => length >= 8, "Password must be at least 8 characters."],
-  }
+  },
+  trips: [{
+    type: Schema.Types.ObjectId,
+    ref: "Trip"
+  }]
 });
 
 userSchema.pre('save', async function (next) {

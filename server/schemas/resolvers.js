@@ -7,17 +7,25 @@ const resolvers = {
   Query: {
     users: async () => {
       // Get and return all documents from the classes collection
-      return await User.find({});
+      return await User.find({}).populate('trips');
     },
 
-    trips: async () => {
-      return await Trip.find({});
+    userTrips: async (parent, args, context) => {
+      console.log(context.user);
+      if (context.user) {
+      return await User.findById(context.user._id).populate('trips');
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+
+    trip: async (parent, args) => {
+      return await Trip.findById(args.tripId);
     }
   },
 
   Mutation: {
-    addUser: async (parent, { username, email, password }) => {
-      const user = await User.create({ username, email, password });
+    addUser: async (parent, { name, email, password }) => {
+      const user = await User.create({ name, email, password });
       const token = signToken(user);
       return { token, user };
     },
@@ -35,7 +43,6 @@ const resolvers = {
       }
 
       const token = signToken(user);
-      console.log({ token, user })
       return { token, user };
     },
     addTrip: async (parent, { organiser, destination, startDate }) => {
@@ -45,12 +52,33 @@ const resolvers = {
       return await Trip.findByIdAndUpdate(
         { _id: tripId },
         {
-          $addToSet: { itinerary: { date, activity }},
+          $addToSet: { itinerary: { date, activity } },
         },
         {
           new: true
         }
       )
+    },
+    addUserToTrip: async (parent, { tripId, guests }) => {
+      const guest = await User.findOne({ _id: guests });
+      const trip = await Trip.findOne({ _id: tripId });
+      console.log("User::::", guest);
+      console.log("Trip:::", trip)
+      const updatedTrip = await Trip.findOneAndUpdate(
+        { _id: tripId },
+        {
+          $addToSet: { guests: guest }
+        },
+        { new: true }
+      )
+      const updatedUser = await User.findOneAndUpdate(
+        { _id: guests},
+        {
+          $addToSet: { trips: trip._id }
+        },
+        { new: true }
+      )
+      return updatedTrip, updatedUser
     }
   }
 };

@@ -6,6 +6,7 @@ const typeDefs = gql`
     name: String
     email: String
     password: String
+    trips: [Trip]
   }
 
   type Trip {
@@ -31,14 +32,16 @@ const typeDefs = gql`
   # Define which queries the front end is allowed to make and what data is returned
   type Query {
     users: [User]
-    trips: [Trip]
+    userTrips: User
+    trip(tripId: ID!): Trip
   }
 
   type Mutation {
     addUser(name: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     addTrip(organiser: ID!, destination: String!, startDate: Float!): Trip
-    addActivity(tripId: ID!, date: Float!, activity: String!):Trip
+    addActivity(tripId: ID!, date: Float!, activity: String!): Trip
+    addUserToTrip(tripId: ID!, guests: ID!): Trip
   }
 `;
 
