@@ -10,7 +10,7 @@ const resolvers = {
       return await User.find({}).populate('trips');
     },
 
-    trips: async (parent, args, context) => {
+    userTrips: async (parent, args, context) => {
       console.log(context.user);
       if (context.user) {
       return await User.findById(context.user._id).populate('trips');

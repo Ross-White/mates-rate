@@ -32,7 +32,7 @@ const typeDefs = gql`
   # Define which queries the front end is allowed to make and what data is returned
   type Query {
     users: [User]
-    trips: User
+    userTrips: User
     trip(tripId: ID!): Trip
   }
 
