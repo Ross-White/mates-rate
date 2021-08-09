@@ -111,7 +111,7 @@ const publishMessage = async ({ body }) => {
     };
 
     const res = await sns.publish(publishParams).promise();
-    
+
     return {
       statusCode: 200,
       body: JSON.stringify(
