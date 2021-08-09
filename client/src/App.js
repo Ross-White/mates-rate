@@ -16,6 +16,7 @@ import Home from "./Pages/Home";
 import PlanTrip from "./Pages/planTrip";
 import TripList from "./Pages/TripList/index";
 import SingleTrip from "./Pages/SingleTrip/index";
+import Itinerary from "./Pages/Itinerary";
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -61,6 +62,9 @@ function App() {
           </Route>
           <Route exact path="/trips/:tripId">
               <SingleTrip />
+          </Route>
+          <Route exact path="/trips/itinerary/:tripId">
+              <Itinerary />
           </Route>
         </div>
       </Router>

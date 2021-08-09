@@ -28,18 +28,18 @@ const SingleTrip = () => {
                 <div>
                     <div className="container grid grid-cols-2">
                         <div className="rounded-full w-full h-48 flex items-center justify-center my-4 mr-2 bg-gray-200">
-                            <Link to={`trips/${trip._id}`}>
+                            <Link to={`itinerary/${trip._id}`}>
                                 Itinerary
                             </Link>
                         </div>
                         <div className="rounded-full w-full h-48 flex items-center justify-center my-4 ml-2 bg-gray-200">
-                            <Link to={`trips/${trip._id}`}>
+                            <Link to={`guestlist/${trip._id}`}>
                                 Guest List
                             </Link>
                         </div>
                     </div>
                     <div className="rounded-full w-full h-60 flex items-center justify-center my-4 bg-gray-200">
-                        <Link to={`trips/${trip._id}`}>
+                        <Link to={`costs/${trip._id}`}>
                                 Costs
                         </Link>
                     </div>

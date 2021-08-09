@@ -26,7 +26,7 @@ const TripList = () => {
 
                         <h4 className="">{trip.startDate}</h4>
 
-                        <Link
+                        <Link to={`trips/${trip._id}`}
                             className=""
                             >
                         View
