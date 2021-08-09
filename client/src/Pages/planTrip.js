@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 
 const PlanTrip = () => {
-    const [tripName, setTripName] = useState("");
+    const [destination, setDestination] = useState("");
+    const [startDate, setStartDate] = useState("");
+    const [itinerary, setItinerary] = useState([]);
+    const [organiser, setOrganiser] = useState("");
+    const [guests, setGuests] = useState([]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -14,8 +18,8 @@ const PlanTrip = () => {
             </div>
             <form onSubmit={handleSubmit} className="col-span-full my-2 inline-flex justify-center">
                 <div className="flex">
-                    <label>Trip name</label>
-                    <input value={tripName} type="text" onChange={e => setTripName(e.target.value)} className="border mx-2"></input>
+                    <label>Destination</label>
+                    <input value={destination} type="text" onChange={e => setDestination(e.target.value)} className="border mx-2"></input>
                     <input type="submit" value="Submit" />
                 </div>
                 
