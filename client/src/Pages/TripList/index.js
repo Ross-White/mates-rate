@@ -28,7 +28,7 @@ const TripList = () => {
 
                         <Link
                             className=""
-                            to={`trips/${trip._id}`}>
+                            >
                         View
                         </ Link>
                     </div>
