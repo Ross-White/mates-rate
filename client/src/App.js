@@ -16,6 +16,8 @@ import Home from "./Pages/Home";
 import PlanTrip from "./Pages/PlanTrip";
 import TripList from "./Pages/TripList";
 import SingleTrip from "./Pages/SingleTrip";
+import Itinerary from "./Pages/Itinerary";
+import GuestList from "./Pages/GuestList";
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -43,7 +45,7 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <Header />
-        <div className="mx-6 my-4 container">
+        <div className="mx-6 my-4 grid md:grid-cols-4 lg:grid-cols-6">
           <Route exact path="/">
             <Home />
           </Route>
@@ -61,6 +63,12 @@ function App() {
           </Route>
           <Route exact path="/trips/:tripId">
               <SingleTrip />
+          </Route>
+          <Route exact path="/trips/itinerary/:tripId">
+              <Itinerary />
+          </Route>
+          <Route exact path="/trips/guestlist/:tripId">
+              <GuestList />
           </Route>
         </div>
       </Router>
