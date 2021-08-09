@@ -8,13 +8,19 @@ const GuestList = () => {
     const { loading, data } = useQuery(QUERY_SINGLE_TRIP, {
         variables: { tripId: tripId },
     });
-
-    const trip = data?.trip || [];
-    console.log(trip.guests);
+    console.log(data)
+    const guests = data.trip.guests || [];
+    console.log(data.trip.guests);
     return (
         <div>
-            <h1>{trip.destination}</h1>
-
+            {guests &&
+            guests.map((guest) => (
+                <section className="m-4 h-16" >
+                    <div className="rounded-full flex flex-row justify-between content-center p-4 bg-gray-200" key={guest._id}>
+                        <h4 className="">{guest.name}</h4>
+                    </div>
+                </section>
+            ))}
         </div>
         
     );
