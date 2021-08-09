@@ -13,7 +13,7 @@ import Login from "./Pages/LogIn";
 import Signup from "./Pages/SignUp";
 import Header from "./components/Header";
 import Home from "./Pages/Home";
-import PlanTrip from "./Pages/planTrip";
+import PlanTrip from "./Pages/PlanTrip";
 import TripList from "./Pages/TripList";
 import SingleTrip from "./Pages/SingleTrip";
 
