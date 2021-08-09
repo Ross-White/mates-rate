@@ -42,9 +42,16 @@ functions:
     handler: sns.subscribeTopic
     events:
       - http:
-          path: sns/subscribe
+          path: subscribe
           method: post
           cors: true
           private: true
-
+  publish-message:
+    handler: sns.publishMessage
+    events:
+      - http:
+          path: publish
+          method: post
+          cors: true
+          private: true
 

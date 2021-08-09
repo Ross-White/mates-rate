@@ -5,14 +5,13 @@ const AWS = require("aws-sdk");
 const sns = new AWS.SNS();
 
 const createTopic = async (event) => {
-
   try {
     const body = JSON.parse(event.body);
     const params = {
       Name: body.topicName,
       Attributes: {
-        'DisplayName': `Mates Rates - ${body.topicName}`
-      }
+        DisplayName: `Mates Rates - ${body.topicName}`,
+      },
     };
 
     const res = await sns.createTopic(params).promise();
@@ -29,7 +28,7 @@ const createTopic = async (event) => {
       ),
     };
   } catch (err) {
-    console.error(err)
+    console.error(err);
     return {
       statusCode: 500,
       body: JSON.stringify(
@@ -44,30 +43,28 @@ const createTopic = async (event) => {
   }
 };
 
-const subscribeTopic = async ({body}) => {
-  
+const subscribeTopic = async ({ body }) => {
   try {
     const protocol = {
       email: "email",
-      sms: "sms"
+      sms: "sms",
     };
     const { topicArn, endpoints } = JSON.parse(body);
-  
-    const promises = endpoints.map(async (endpoint) => {
 
+    const promises = endpoints.map(async (endpoint) => {
       const subscribeParams = {
         Protocol: protocol[endpoint.type],
         TopicArn: topicArn,
         Endpoint: endpoint.value,
         ReturnSubscriptionArn: false,
       };
-    
+
       const res = await sns.subscribe(subscribeParams).promise();
       return res;
     });
-    
+
     const subRes = await Promise.all(promises);
-    
+
     return {
       statusCode: 200,
       body: JSON.stringify(
@@ -92,9 +89,57 @@ const subscribeTopic = async ({body}) => {
       ),
     };
   }
-}
+};
+
+const publishMessage = async ({ body }) => {
+  try {
+    const { message, topicArn, subject, senderId } = JSON.parse(body);
+
+    const parsedSenderId =
+      senderId && senderId.substring(0, 11).split(" ").join("").toUpperCase();
+
+    const publishParams = {
+      Message: message,
+      Subject: subject,
+      TopicArn: topicArn,
+      MessageAttributes: {
+        "AWS.SNS.SMS.SenderID": {
+          DataType: "String",
+          StringValue: parsedSenderId,
+        },
+      },
+    };
+
+    const res = await sns.publish(publishParams).promise();
+    
+    return {
+      statusCode: 200,
+      body: JSON.stringify(
+        {
+          message: `Succesfully sent message to subscribers!`,
+          res,
+        },
+        null,
+        2
+      ),
+    };
+  } catch (err) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify(
+        {
+          message: `Could not publish message.`,
+          err,
+        },
+        null,
+        2
+      ),
+    };
+  }
+};
 
 module.exports = {
   createTopic,
-  subscribeTopic
+  subscribeTopic,
+  publishMessage,
 };
