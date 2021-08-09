@@ -1,0 +1,41 @@
+org: ldrogan
+app: aws-serverless-sns
+service: aws-serverless-sns
+
+frameworkVersion: '2'
+
+package:
+  patterns:
+    - '!node_modules/**'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+  apiKeys:
+    - snsKey
+  iam: 
+    role: 
+      statements:
+        - Effect: "Allow"
+          Resource: "*"
+          Action:
+            - "sns:*"
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+          path: hello
+          method: post
+          cors: true
+  create-topic:
+    handler: sns.createTopic
+    events:
+      - http:
+          path: topic
+          method: post
+          cors: true
+          private: true
+
