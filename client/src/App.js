@@ -13,7 +13,7 @@ import Login from "./Pages/LogIn";
 import Signup from "./Pages/SignUp";
 import Header from "./components/Header";
 import Home from "./Pages/Home";
-import PlanTrip from "./Pages/planTrip";
+import PlanTrip from "./Pages/PlanTrip";
 import TripList from "./Pages/TripList";
 import SingleTrip from "./Pages/SingleTrip";
 
@@ -43,7 +43,7 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <Header />
-        <div className="mx-6 my-4 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
+        <div className="mx-6 my-4 container">
           <Route exact path="/">
             <Home />
           </Route>
