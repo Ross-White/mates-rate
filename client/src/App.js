@@ -16,6 +16,8 @@ import Home from "./Pages/Home";
 import PlanTrip from "./Pages/PlanTrip";
 import TripList from "./Pages/TripList";
 import SingleTrip from "./Pages/SingleTrip";
+import Itinerary from "./Pages/Itinerary";
+import GuestList from "./Pages/GuestList";
 
 const httpLink = createHttpLink({
   uri: '/graphql',
