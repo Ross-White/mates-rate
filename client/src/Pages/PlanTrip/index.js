@@ -4,10 +4,7 @@ import { ADD_TRIP } from "../../utils/mutations";
 import { useMutation } from "@apollo/client";
 
 import GuestListForm from "../../components/GuestListForm";
-
-function GuestList({ guest }) {
-  return <div className="guest">{guest.email}</div>;
-}
+import GuestList from "../../components/GuestList";
 
 
 const PlanTrip = () => {
@@ -27,6 +24,7 @@ const PlanTrip = () => {
     console.log(formState);
 
     try {
+      console.log(formState)
       const { data } = await addTrip({
         variables: { ...formState },
       });
