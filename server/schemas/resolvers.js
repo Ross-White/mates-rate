@@ -45,8 +45,18 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    addTrip: async (parent, { organiser, destination, startDate }) => {
-      return await Trip.create({ organiser, destination, startDate });
+    addTrip: async (parent, {  destination, startDate }, context) => {
+      const trip = await Trip.create({
+        organiser: context.user._id,
+        destination, 
+        startDate 
+      });
+      console.log(trip);
+      await User.findOneAndUpdate(
+        { _id: context.user._id },
+        { $addToSet: { trips: trip._id }}
+      );
+      return trip;
     },
     addActivity: async (parent, { tripId, date, activity }) => {
       return await Trip.findByIdAndUpdate(
