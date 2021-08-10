@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { LOGIN_USER } from "../utils/mutations";
+import { LOGIN_USER } from "../../utils/mutations";
 import { Link } from 'react-router-dom';
-import Auth from "../utils/auth";
+import Auth from "./../../utils/auth";
 import { useMutation } from "@apollo/client";
 
 export default function SignIn() {
