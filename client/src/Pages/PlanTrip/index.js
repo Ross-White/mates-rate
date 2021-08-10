@@ -6,10 +6,10 @@ import { useMutation } from "@apollo/client";
 import GuestListForm from "../../components/GuestListForm";
 import GuestList from "../../components/GuestList";
 
+
 const PlanTrip = () => {
   const [formState, setFormState] = useState({
     destination: "",
-    organiser: "",
     startDate: "",
   });
 
@@ -24,7 +24,10 @@ const PlanTrip = () => {
 
     console.log(formState);
     addTrip({
-      variables: { ...formState },
+      variables: {
+        "addTripDestination": formState.destination,
+        "addTripStartDate": formState.startDate
+      },
     });
   };
 
@@ -110,7 +113,7 @@ const PlanTrip = () => {
             Create Trip
           </button>
         </form>
-        
+
       </div>
     </div>
   );
