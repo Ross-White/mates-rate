@@ -6,7 +6,6 @@ import { useMutation } from "@apollo/client";
 import GuestListForm from "../../components/GuestListForm";
 import GuestList from "../../components/GuestList";
 
-
 const PlanTrip = () => {
   const [formState, setFormState] = useState({
     destination: "",
@@ -16,21 +15,17 @@ const PlanTrip = () => {
 
   const [guests, setGuests] = useState([{ email: "oli@gmail.com" }]);
 
-  const [addTrip, { error, data }] = useMutation(ADD_TRIP);
+  const [addTrip] = useMutation(ADD_TRIP);
 
-  const handleFormSubmit = async (e) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
     //sns..
     console.log(formState);
 
-    try {
-      console.log(formState)
-      const { data } = await addTrip({
-        variables: { ...formState },
-      });
-    } catch (e) {
-      console.error(e);
-    }
+    console.log(formState);
+    addTrip({
+      variables: { ...formState },
+    });
   };
 
   const handleChange = (event) => {
@@ -78,8 +73,8 @@ const PlanTrip = () => {
             <input
               value={formState.startDate}
               type="date"
-              name="start"
-              id="start"
+              name="startDate"
+              id="startDate"
               onChange={handleChange}
               className="border py-2 px-3 text-grey-darkest md:mr-2"
             />
@@ -98,22 +93,24 @@ const PlanTrip = () => {
               className="border py-2 px-3 text-grey-darkest md:mr-2"
             />
           </div>
+
+          <GuestListForm addGuest={addGuest} />
+
+          <div className="flex flex-col mb-4 w-full">
+            <h2 className="mb-2 tracking-wide font-bold text-lg text-gray-800">Guest List</h2>
+            {guests.map((guest, index) => (
+              <GuestList key={index} index={index} guest={guest} />
+            ))}
+          </div>
+
+          <button
+            className="block bg-green-500 hover:bg-green-400 text-white uppercase text-lg mx-auto p-4 rounded mt-4"
+            type="submit"
+          >
+            Create Trip
+          </button>
         </form>
-        <GuestListForm addGuest={addGuest} />
-
-        <div className="guestList mt-1">
-          <h2>Guest List</h2>
-          {guests.map((guest, index) => (
-            <GuestList key={index} index={index} guest={guest} />
-          ))}
-        </div>
-
-        <button
-          className="block bg-green-500 hover:bg-green-400 text-white uppercase text-lg mx-auto p-4 rounded mt-4"
-          type="submit"
-        >
-          Create Trip
-        </button>
+        
       </div>
     </div>
   );
