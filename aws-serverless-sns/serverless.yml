@@ -12,6 +12,8 @@ provider:
   name: aws
   runtime: nodejs12.x
   lambdaHashingVersion: 20201221
+  apiKeys:
+    - snsKey
   iam: 
     role: 
       statements:
@@ -35,4 +37,21 @@ functions:
           path: topic
           method: post
           cors: true
+          private: true
+  subscribe-topic:
+    handler: sns.subscribeTopic
+    events:
+      - http:
+          path: subscribe
+          method: post
+          cors: true
+          private: true
+  publish-message:
+    handler: sns.publishMessage
+    events:
+      - http:
+          path: publish
+          method: post
+          cors: true
+          private: true
 
