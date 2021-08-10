@@ -46,9 +46,10 @@ const resolvers = {
       return { token, user };
     },
     addTrip: async (parent, {  destination, startDate }, context) => {
+     
       const trip = await Trip.create({
-        organiser: context.user._id,
         destination, 
+        organiser: context.user._id,
         startDate 
       });
       console.log(trip);
