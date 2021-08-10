@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 
 function GuestList({ guest }) {
-  return <div className="guests">{guest.name}</div>;
+  return <div className="guest">{guest.email}</div>;
 }
 
 function GuestListForm({ addGuest }) {
   const [value, setValue] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     if (!value) return;
     addGuest(value);
@@ -23,7 +23,7 @@ function GuestListForm({ addGuest }) {
         type="email"
         className="border py-2 px-3 text-grey-darkest md:mr-2"
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={e => setValue(e.target.value)}
       />
       <button onClick={handleSubmit}>Add guest</button>
     </form>
@@ -35,15 +35,15 @@ const PlanTrip = () => {
   const [startDate, setStartDate] = useState("");
   const [organiser, setOrganiser] = useState("");
 
-  const [guests, setGuests] = useState([{ name: "", email: "" }]);
+  const [guests, setGuests] = useState([{ email: "oli@gmail.com" }]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     //sns..
   };
 
-  const addGuest = (text) => {
-    const newGuests = [...guests, { text }];
+  const addGuest = email => {
+    const newGuests = [...guests, { email }];
     setGuests(newGuests);
   };
 
