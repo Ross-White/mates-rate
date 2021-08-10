@@ -101,7 +101,8 @@ const PlanTrip = () => {
         </form>
         <GuestListForm addGuest={addGuest} />
 
-        <div className="guestList">
+        <div className="guestList mt-1">
+          <h2>Guest List</h2>
           {guests.map((guest, index) => (
             <GuestList key={index} index={index} guest={guest} />
           ))}
