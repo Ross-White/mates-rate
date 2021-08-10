@@ -1,10 +1,27 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 import { ADD_TRIP } from "../../utils/mutations";
 import { useMutation } from "@apollo/client";
 
 import GuestListForm from "../../components/GuestListForm";
 import GuestList from "../../components/GuestList";
+
+const createTopic = async (topicName) => {
+  try {
+  const result = await axios({
+    method: 'post',
+    url: 'https://fvagknn9al.execute-api.us-east-1.amazonaws.com/dev/topic',
+    headers: {'x-api-key': '44bw70Hmoq6ayQ9NvOqY85YTyJ0AbPJL2FniQImB'},
+    data: {
+      topicName,
+    }
+  });
+  return result.topicArn 
+} catch (err) {
+  console.error(err)
+}
+};
 
 const PlanTrip = () => {
   const [formState, setFormState] = useState({
@@ -17,12 +34,11 @@ const PlanTrip = () => {
 
   const [addTrip] = useMutation(ADD_TRIP);
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    //sns..
-    console.log(formState);
-
-    console.log(formState);
+    const topicArn = await createTopic(formState.destination);
+    console.log(topicArn);
+    
     addTrip({
       variables: { ...formState },
     });
