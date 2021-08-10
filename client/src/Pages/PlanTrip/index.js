@@ -26,7 +26,6 @@ const createTopic = async (topicName) => {
 const PlanTrip = () => {
   const [formState, setFormState] = useState({
     destination: "",
-    organiser: "",
     startDate: "",
   });
 
@@ -40,7 +39,10 @@ const PlanTrip = () => {
     console.log(topicArn);
     
     addTrip({
-      variables: { ...formState },
+      variables: {
+        "addTripDestination": formState.destination,
+        "addTripStartDate": formState.startDate
+      },
     });
   };
 
@@ -126,7 +128,7 @@ const PlanTrip = () => {
             Create Trip
           </button>
         </form>
-        
+
       </div>
     </div>
   );
