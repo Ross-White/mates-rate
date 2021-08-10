@@ -1,48 +1,50 @@
 import React, { useState } from "react";
 
+import { ADD_TRIP } from "../../utils/mutations";
+import { useMutation } from "@apollo/client";
+
+import GuestListForm from "../../components/GuestListForm";
+
 function GuestList({ guest }) {
   return <div className="guest">{guest.email}</div>;
 }
 
-function GuestListForm({ addGuest }) {
-  const [value, setValue] = useState("");
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    if (!value) return;
-    addGuest(value);
-    setValue("");
-  };
-
-  return (
-    <form>
-      <label className="mb-2 tracking-wide font-bold text-lg text-gray-800">
-        Invite guest via email
-      </label>
-      <input
-        type="email"
-        className="border py-2 px-3 text-grey-darkest md:mr-2"
-        value={value}
-        onChange={e => setValue(e.target.value)}
-      />
-      <button onClick={handleSubmit}>Add guest</button>
-    </form>
-  );
-}
 
 const PlanTrip = () => {
-  const [destination, setDestination] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [organiser, setOrganiser] = useState("");
+  const [formState, setFormState] = useState({
+    destination: "",
+    organiser: "",
+    startDate: "",
+  });
 
   const [guests, setGuests] = useState([{ email: "oli@gmail.com" }]);
 
-  const handleSubmit = (e) => {
+  const [addTrip, { error, data }] = useMutation(ADD_TRIP);
+
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     //sns..
+    console.log(formState);
+
+    try {
+      const { data } = await addTrip({
+        variables: { ...formState },
+      });
+    } catch (e) {
+      console.error(e);
+    }
   };
 
-  const addGuest = email => {
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
+
+  const addGuest = (email) => {
     const newGuests = [...guests, { email }];
     setGuests(newGuests);
   };
@@ -54,7 +56,7 @@ const PlanTrip = () => {
           Plan new trip
         </h2>
         <form
-          onSubmit={handleSubmit}
+          onSubmit={handleFormSubmit}
           className="mb-4 md:flex md:flex-wrap md:justify-between"
         >
           <div className="flex flex-col mb-4 md:w1/2">
@@ -62,11 +64,11 @@ const PlanTrip = () => {
               Destination
             </label>
             <input
-              value={destination}
+              value={formState.destination}
               type="text"
               name="destination"
               id="destination"
-              onChange={(e) => setDestination(e.target.value)}
+              onChange={handleChange}
               className="border py-2 px-3 text-grey-darkest md:mr-2"
             />
           </div>
@@ -76,11 +78,11 @@ const PlanTrip = () => {
               Start date
             </label>
             <input
-              value={startDate}
+              value={formState.startDate}
               type="date"
               name="start"
               id="start"
-              onChange={(e) => setStartDate(e.target.value)}
+              onChange={handleChange}
               className="border py-2 px-3 text-grey-darkest md:mr-2"
             />
           </div>
@@ -90,11 +92,11 @@ const PlanTrip = () => {
               Organiser
             </label>
             <input
-              value={organiser}
+              value={formState.organiser}
               type="text"
               name="organiser"
               id="organiser"
-              onChange={(e) => setOrganiser(e.target.value)}
+              onChange={handleChange}
               className="border py-2 px-3 text-grey-darkest md:mr-2"
             />
           </div>
