@@ -23,3 +23,14 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const ADD_TRIP = gql`
+  mutation addTrip($organiser: String!, $destination: String!, $startDate: Date!) {
+    addTrip(organiser: $organiser, destination: $destination, startDate: $startDate) {
+      trip {
+        _id
+        destination
+      }
+    }
+  }
+`
