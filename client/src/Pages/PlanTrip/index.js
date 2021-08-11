@@ -12,12 +12,17 @@ const createTopic = async (topicName) => {
   const result = await axios({
     method: 'post',
     url: 'https://fvagknn9al.execute-api.us-east-1.amazonaws.com/dev/topic',
-    headers: {'x-api-key': '44bw70Hmoq6ayQ9NvOqY85YTyJ0AbPJL2FniQImB'},
+    headers: {
+    'x-api-key': '',
+    'Content-Type': 'application/json',
+    },
     data: {
       topicName,
     }
   });
-  return result.topicArn 
+  console.log(result)
+
+  return result.data.topicArn 
 } catch (err) {
   console.error(err)
 }
@@ -36,12 +41,18 @@ const PlanTrip = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const topicArn = await createTopic(formState.destination);
+    console.log(formState.destination);
     console.log(topicArn);
+
+    //subscribe: after createTopic, subscribeGuests using topicArn & endpoints (email / sms)
+    //ideally add topicArn into database
+    // google-libphonenumber for converting phone numbers to valid e.164 (international numbers - otherwise sms will not work!!!)
     
     addTrip({
       variables: {
         "addTripDestination": formState.destination,
         "addTripStartDate": formState.startDate
+        //add topicArn
       },
     });
   };

@@ -1,6 +1,10 @@
 "use strict";
 
 const AWS = require("aws-sdk");
+const headersCors = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Credentials': true,
+},
 
 const sns = new AWS.SNS();
 
@@ -18,6 +22,7 @@ const createTopic = async (event) => {
     console.log(res);
     return {
       statusCode: 200,
+      headers: headersCors,
       body: JSON.stringify(
         {
           message: `Topic created: ${body.topicName}`,
@@ -67,6 +72,7 @@ const subscribeTopic = async ({ body }) => {
 
     return {
       statusCode: 200,
+      headers: headersCors,
       body: JSON.stringify(
         {
           message: `Succesfully subscribed to topic!`,
@@ -114,6 +120,7 @@ const publishMessage = async ({ body }) => {
     
     return {
       statusCode: 200,
+      headers: headersCors,
       body: JSON.stringify(
         {
           message: `Succesfully sent message to subscribers!`,
