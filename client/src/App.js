@@ -1,4 +1,4 @@
-import "./App.css";
+import "./assets/main.css";
 import React from "react";
 import {
   ApolloClient,
