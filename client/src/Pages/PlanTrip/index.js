@@ -7,6 +7,8 @@ import { useMutation } from "@apollo/client";
 import GuestListForm from "../../components/GuestListForm";
 import GuestList from "../../components/GuestList";
 
+import auth from "../../utils/auth";
+
 const createTopic = async (topicName) => {
   try {
   const result = await axios({
