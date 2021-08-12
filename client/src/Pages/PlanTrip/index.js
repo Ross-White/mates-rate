@@ -67,16 +67,12 @@ const PlanTrip = () => {
     e.preventDefault();
 
     // const topicArn = await createTopic(formState.destination);
-    // console.log(topicArn);
-    console.log("All guests:", guests);
-    const testGuest = guests[0].email
-    const subscription = await createSub('arn:aws:sns:us-east-1:658819480678:newtest11', testGuest);
-    console.log("subscription: ", subscription)
-    // for (let i = 0; i <= guests.length; i++) {
-    //   console.log("Subscribing :", guests[i]);
-    //   const subscription = await createSub(topicArn, guests[i]);
-    //   console.log("response: ", subscription);
-    // }
+   
+    for (let i = 0; i <= guests.length; i++) {
+      const guest = guests[i].email
+      const subscription = await createSub('arn:aws:sns:us-east-1:658819480678:newtest11', guest);
+      console.info("subscribed successfully: ", subscription);
+    }
 
     addTrip({
       variables: {
