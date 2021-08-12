@@ -33,7 +33,8 @@ const createTopic = async (topicName) => {
 const PlanTrip = () => {
   const [formState, setFormState] = useState({
     destination: "",
-    startDate: "",
+    startDate: null,
+    organiser: auth.getProfile().data._id
   });
 
   const [guests, setGuests] = useState([{ email: "oli@gmail.com" }]);
