@@ -7,6 +7,8 @@ import { useMutation } from "@apollo/client";
 import GuestListForm from "../../components/GuestListForm";
 import GuestList from "../../components/GuestList";
 
+import auth from "../../utils/auth";
+
 const createTopic = async (topicName) => {
   try {
   const result = await axios({
@@ -26,24 +28,35 @@ const createTopic = async (topicName) => {
 const PlanTrip = () => {
   const [formState, setFormState] = useState({
     destination: "",
-    startDate: "",
+    organiser: auth.getProfile().data._id,
+    startDate: null,
   });
 
   const [guests, setGuests] = useState([{ email: "oli@gmail.com" }]);
 
-  const [addTrip] = useMutation(ADD_TRIP);
+  const [addTrip, { error }] = useMutation(ADD_TRIP);
 
   const handleFormSubmit = async (e) => {
+    console.log("form submit")
     e.preventDefault();
-    const topicArn = await createTopic(formState.destination);
-    console.log(topicArn);
-    
-    addTrip({
-      variables: {
-        "addTripDestination": formState.destination,
-        "addTripStartDate": formState.startDate
-      },
-    });
+    try {
+      const topicArn = await createTopic(formState.destination);
+      const { data } = await addTrip({
+        variables: {
+          destination: formState.destination,
+          organiser: formState.organiser
+        },
+      });
+      setFormState({
+        destination: "",
+        organiser: "",
+        startDate: null,
+      })
+      console.log(data)
+    } catch (err) {
+      console.log(err)
+    }
+
   };
 
   const handleChange = (event) => {
@@ -128,6 +141,12 @@ const PlanTrip = () => {
             Create Trip
           </button>
         </form>
+
+        {error && (
+              <div className="my-3 p-3 bg-red-500 text-white">
+                {error.message}
+              </div>
+            )}
 
       </div>
     </div>

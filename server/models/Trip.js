@@ -4,12 +4,11 @@ const tripSchema = new Schema({
     destination: {
         type: String,
         required: true,
-        unique: true,
         trim: true,
     },
     startDate: {
         type: Date,
-        required: true,
+        // required: true,
     },
     organiser: {
         type: Schema.Types.ObjectId,

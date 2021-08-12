@@ -5,7 +5,7 @@ import { QUERY_SINGLE_TRIP } from '../../utils/queries';
 
 const Itinerary = () => {
     const { tripId } = useParams();
-    const { loading, data } = useQuery(QUERY_SINGLE_TRIP, {
+    const { data } = useQuery(QUERY_SINGLE_TRIP, {
         variables: { tripId: tripId },
     });
 
