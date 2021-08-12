@@ -53,11 +53,14 @@ const PlanTrip = () => {
     
     addTrip({
       variables: {
-        "addTripDestination": formState.destination,
-        "addTripStartDate": formState.startDate
-        //add topicArn
+        destination: formState.destination,
+        organiser: formState.organiser
+        // startDate: formState.startDate TODO: nconvert string to unix/decimal
       },
     });
+    setFormState({
+      
+    })
   };
 
   const handleChange = (event) => {
