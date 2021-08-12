@@ -7,26 +7,7 @@ import { useMutation } from "@apollo/client";
 import GuestListForm from "../../components/GuestListForm";
 import GuestList from "../../components/GuestList";
 
-const createTopic = async (topicName) => {
-  try {
-  const result = await axios({
-    method: 'post',
-    url: 'https://fvagknn9al.execute-api.us-east-1.amazonaws.com/dev/topic',
-    headers: {
-    'x-api-key': '',
-    'Content-Type': 'application/json',
-    },
-    data: {
-      topicName,
-    }
-  });
-  console.log(result)
 
-  return result.data.topicArn 
-} catch (err) {
-  console.error(err)
-}
-};
 
 const PlanTrip = () => {
   const [formState, setFormState] = useState({
@@ -38,24 +19,77 @@ const PlanTrip = () => {
 
   const [addTrip] = useMutation(ADD_TRIP);
 
+  const createTopic = async (topicName) => {
+    try {
+      const result = await axios({
+        method: "post",
+        url: "https://fvagknn9al.execute-api.us-east-1.amazonaws.com/dev/topic",
+        headers: {
+          "x-api-key": "44bw70Hmoq6ayQ9NvOqY85YTyJ0AbPJL2FniQImB",
+          "Content-Type": "application/json",
+        },
+        data: {
+          topicName,
+        },
+      });
+      console.log(result);
+  
+      return result.data.topicArn;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+
+  const createSub = async (topicARN, guest) => {
+    try {
+      const result = await axios({
+        method: "post",
+        url:
+          "https://fvagknn9al.execute-api.us-east-1.amazonaws.com/dev/subscribe",
+        headers: {
+          "x-api-key": "44bw70Hmoq6ayQ9NvOqY85YTyJ0AbPJL2FniQImB",
+          "Content-Type": "application/json",
+        },
+        data: {
+          topicArn: topicARN,
+          endpoints: [{ type: "email", value: guest }],
+        },
+      });
+      console.log(result);
+
+      return result;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const topicArn = await createTopic(formState.destination);
-    console.log(formState.destination);
-    console.log(topicArn);
-
-    //subscribe: after createTopic, subscribeGuests using topicArn & endpoints (email / sms)
-    //ideally add topicArn into database
-    // google-libphonenumber for converting phone numbers to valid e.164 (international numbers - otherwise sms will not work!!!)
     
-    addTrip({
-      variables: {
-        "addTripDestination": formState.destination,
-        "addTripStartDate": formState.startDate
-        //add topicArn
-      },
-    });
+    const topicArn = await createTopic(formState.destination);
+    console.log(topicArn)
+    console.log("All guests:", guests)
+
+    for (let i = 0; i <= guests.length; i++) {
+      console.log("Subscribing :",guests[i]);
+      const subscription = await createSub(topicArn, guests[i]);
+      console.log(subscription);
+    }
   };
+  //subscribe: after createTopic, subscribeGuests using topicArn & endpoints (email / sms)
+  //ideally add topicArn into database
+  //   // google-libphonenumber for converting phone numbers to valid e.164 (international numbers - otherwise sms will not work!!!)
+  
+  // addTrip({
+  //     variables: {
+  //       addTripDestination: formState.destination,
+  //       addTripStartDate: formState.startDate,
+  //       //add topicArn
+  //     },
+  //   });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -126,7 +160,9 @@ const PlanTrip = () => {
           <GuestListForm addGuest={addGuest} />
 
           <div className="flex flex-col mb-4 w-full">
-            <h2 className="mb-2 tracking-wide font-bold text-lg text-gray-800">Guest List</h2>
+            <h2 className="mb-2 tracking-wide font-bold text-lg text-gray-800">
+              Guest List
+            </h2>
             {guests.map((guest, index) => (
               <GuestList key={index} index={index} guest={guest} />
             ))}
@@ -139,7 +175,6 @@ const PlanTrip = () => {
             Create Trip
           </button>
         </form>
-
       </div>
     </div>
   );
