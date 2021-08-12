@@ -11,30 +11,30 @@ import Auth from "../../utils/auth";
 
 const createTopic = async (topicName) => {
   try {
-  const result = await axios({
-    method: 'post',
-    url: 'https://fvagknn9al.execute-api.us-east-1.amazonaws.com/dev/topic',
-    headers: {
-    'x-api-key': '',
-    'Content-Type': 'application/json',
-    },
-    data: {
-      topicName,
-    }
-  });
-  console.log(result)
+    const result = await axios({
+      method: "post",
+      url: "https://fvagknn9al.execute-api.us-east-1.amazonaws.com/dev/topic",
+      headers: {
+        "x-api-key": "",
+        "Content-Type": "application/json",
+      },
+      data: {
+        topicName,
+      },
+    });
+    console.log(result);
 
-  return result.data.topicArn 
-} catch (err) {
-  console.error(err)
-}
+    return result.data.topicArn;
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 const PlanTrip = () => {
   const [formState, setFormState] = useState({
     destination: "",
     startDate: null,
-    organiser: Auth.getProfile().data._id
+    organiser: Auth.getProfile().data._id,
   });
 
   const [guests, setGuests] = useState([{ email: "oli@gmail.com" }]);
@@ -43,9 +43,6 @@ const PlanTrip = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const topicArn = await createTopic(formState.destination);
-    console.log(formState.destination);
-    console.log(topicArn);
 
     //subscribe: after createTopic, subscribeGuests using topicArn & endpoints (email / sms)
     //ideally add topicArn into database
@@ -55,24 +52,26 @@ const PlanTrip = () => {
       const newTrip = await addTrip({
         variables: {
           destination: formState.destination,
-          organiser: formState.organiser
+          organiser: formState.organiser,
           // startDate: formState.startDate TODO: nconvert string to unix/decimal
         },
       });
 
+      const topicArn = await createTopic(formState.destination);
+
+      console.log(`Topic ARN:::: ${topicArn}`);
+      console.log(`TNew Trip:::: ${newTrip}`);
+
       setFormState({
         destination: "",
         organiser: Auth.getProfile().data._id,
-        startDate: null
-      })
+        startDate: null,
+      });
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-    
-    
-    setFormState({
-      
-    })
+
+    setFormState({});
   };
 
   const handleChange = (event) => {
@@ -118,7 +117,7 @@ const PlanTrip = () => {
               Start date
             </label>
             <input
-              value={formState.startDate}
+              value=""
               type="date"
               name="startDate"
               id="startDate"
@@ -141,15 +140,6 @@ const PlanTrip = () => {
             />
           </div>
 
-          <GuestListForm addGuest={addGuest} />
-
-          <div className="flex flex-col mb-4 w-full">
-            <h2 className="mb-2 tracking-wide font-bold text-lg text-gray-800">Guest List</h2>
-            {guests.map((guest, index) => (
-              <GuestList key={index} index={index} guest={guest} />
-            ))}
-          </div>
-
           <button
             className="block bg-green-500 hover:bg-green-400 text-white uppercase text-lg mx-auto p-4 rounded mt-4"
             type="submit"
@@ -158,6 +148,16 @@ const PlanTrip = () => {
           </button>
         </form>
 
+        <GuestListForm addGuest={addGuest} />
+
+        <div className="flex flex-col mb-4 w-full">
+          <h2 className="mb-2 tracking-wide font-bold text-lg text-gray-800">
+            Guest List
+          </h2>
+          {guests.map((guest, index) => (
+            <GuestList key={index} index={index} guest={guest} />
+          ))}
+        </div>
       </div>
     </div>
   );
