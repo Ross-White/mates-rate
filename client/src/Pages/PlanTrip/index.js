@@ -66,11 +66,11 @@ const PlanTrip = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    // const topicArn = await createTopic(formState.destination);
-   
+    const topicArn = await createTopic(formState.destination);
+    console.log('topicArn: ', topicArn);
     for (let i = 0; i <= guests.length; i++) {
       const guest = guests[i].email
-      const subscription = await createSub('arn:aws:sns:us-east-1:658819480678:newtest11', guest);
+      const subscription = await createSub(topicArn, guest);
       console.info("subscribed successfully: ", subscription);
     }
 
