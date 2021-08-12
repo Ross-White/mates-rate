@@ -7,7 +7,7 @@ import { useMutation } from "@apollo/client";
 import GuestListForm from "../../components/GuestListForm";
 import GuestList from "../../components/GuestList";
 
-import auth from "../../utils/auth";
+import Auth from "../../utils/auth";
 
 const createTopic = async (topicName) => {
   try {
@@ -34,7 +34,7 @@ const PlanTrip = () => {
   const [formState, setFormState] = useState({
     destination: "",
     startDate: null,
-    organiser: auth.getProfile().data._id
+    organiser: Auth.getProfile().data._id
   });
 
   const [guests, setGuests] = useState([{ email: "oli@gmail.com" }]);
@@ -50,14 +50,26 @@ const PlanTrip = () => {
     //subscribe: after createTopic, subscribeGuests using topicArn & endpoints (email / sms)
     //ideally add topicArn into database
     // google-libphonenumber for converting phone numbers to valid e.164 (international numbers - otherwise sms will not work!!!)
+
+    try {
+      const newTrip = await addTrip({
+        variables: {
+          destination: formState.destination,
+          organiser: formState.organiser
+          // startDate: formState.startDate TODO: nconvert string to unix/decimal
+        },
+      });
+
+      setFormState({
+        destination: "",
+        organiser: Auth.getProfile().data._id,
+        startDate: null
+      })
+    } catch (err) {
+      console.log(err)
+    }
     
-    addTrip({
-      variables: {
-        destination: formState.destination,
-        organiser: formState.organiser
-        // startDate: formState.startDate TODO: nconvert string to unix/decimal
-      },
-    });
+    
     setFormState({
       
     })
