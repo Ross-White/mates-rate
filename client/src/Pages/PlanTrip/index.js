@@ -3,16 +3,16 @@ import axios from "axios";
 
 import { ADD_TRIP } from "../../utils/mutations";
 import { useMutation } from "@apollo/client";
+import Auth from "../../utils/auth";
 
 import GuestListForm from "../../components/GuestListForm";
 import GuestList from "../../components/GuestList";
 
-
-
 const PlanTrip = () => {
   const [formState, setFormState] = useState({
     destination: "",
-    startDate: "",
+    startDate: null,
+    organiser: Auth.getProfile().data._id,
   });
 
   const [guests, setGuests] = useState([{ email: "oli@gmail.com" }]);
@@ -33,13 +33,12 @@ const PlanTrip = () => {
         },
       });
       console.log(result);
-  
+
       return result.data.topicArn;
     } catch (err) {
       console.error(err);
     }
   };
-
 
   const createSub = async (topicARN, guest) => {
     try {
@@ -56,7 +55,7 @@ const PlanTrip = () => {
           endpoints: [{ type: "email", value: guest }],
         },
       });
-      console.log(result);
+      console.log("create sub res:", result);
 
       return result;
     } catch (err) {
@@ -64,32 +63,32 @@ const PlanTrip = () => {
     }
   };
 
-
-
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    
-    const topicArn = await createTopic(formState.destination);
-    console.log(topicArn)
-    console.log("All guests:", guests)
 
-    for (let i = 0; i <= guests.length; i++) {
-      console.log("Subscribing :",guests[i]);
-      const subscription = await createSub(topicArn, guests[i]);
-      console.log(subscription);
-    }
+    // const topicArn = await createTopic(formState.destination);
+    // console.log(topicArn);
+    console.log("All guests:", guests);
+    const testGuest = guests[0].email
+    const subscription = await createSub('arn:aws:sns:us-east-1:658819480678:newtest11', testGuest);
+    console.log("subscription: ", subscription)
+    // for (let i = 0; i <= guests.length; i++) {
+    //   console.log("Subscribing :", guests[i]);
+    //   const subscription = await createSub(topicArn, guests[i]);
+    //   console.log("response: ", subscription);
+    // }
+
+    addTrip({
+      variables: {
+        addTripDestination: formState.destination,
+        addTripStartDate: formState.startDate,
+        //add topicArn
+      },
+    });
   };
   //subscribe: after createTopic, subscribeGuests using topicArn & endpoints (email / sms)
   //ideally add topicArn into database
   //   // google-libphonenumber for converting phone numbers to valid e.164 (international numbers - otherwise sms will not work!!!)
-  
-  // addTrip({
-  //     variables: {
-  //       addTripDestination: formState.destination,
-  //       addTripStartDate: formState.startDate,
-  //       //add topicArn
-  //     },
-  //   });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -134,7 +133,7 @@ const PlanTrip = () => {
               Start date
             </label>
             <input
-              value={formState.startDate}
+              value=""
               type="date"
               name="startDate"
               id="startDate"
