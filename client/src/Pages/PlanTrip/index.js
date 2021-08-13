@@ -15,7 +15,7 @@ const PlanTrip = () => {
     organiser: Auth.getProfile().data._id,
   });
 
-  const [guests, setGuests] = useState([{ email: "oli@gmail.com" }]);
+  const [guests, setGuests] = useState(["oli@gmail.com"]);
 
   const [addTrip] = useMutation(ADD_TRIP);
 
@@ -69,16 +69,15 @@ const PlanTrip = () => {
     const topicArn = await createTopic(formState.destination);
     console.log('topicArn: ', topicArn);
     for (let i = 0; i <= guests.length; i++) {
-      const guest = guests[i].email
+      const guest = guests[i] 
       const subscription = await createSub(topicArn, guest);
       console.info("subscribed successfully: ", subscription);
     }
 
     addTrip({
       variables: {
-        addTripDestination: formState.destination,
-        addTripStartDate: formState.startDate,
-        //add topicArn
+        destination: formState.destination,
+        organiser: Auth.getProfile().data._id
       },
     });
   };
