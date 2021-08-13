@@ -3,32 +3,10 @@ import axios from "axios";
 
 import { ADD_TRIP } from "../../utils/mutations";
 import { useMutation } from "@apollo/client";
+import Auth from "../../utils/auth";
 
 import GuestListForm from "../../components/GuestListForm";
 import GuestList from "../../components/GuestList";
-
-import Auth from "../../utils/auth";
-
-const createTopic = async (topicName) => {
-  try {
-    const result = await axios({
-      method: "post",
-      url: "https://fvagknn9al.execute-api.us-east-1.amazonaws.com/dev/topic",
-      headers: {
-        "x-api-key": "",
-        "Content-Type": "application/json",
-      },
-      data: {
-        topicName,
-      },
-    });
-    console.log(result);
-
-    return result.data.topicArn;
-  } catch (err) {
-    console.error(err);
-  }
-};
 
 const PlanTrip = () => {
   const [formState, setFormState] = useState({
@@ -41,38 +19,72 @@ const PlanTrip = () => {
 
   const [addTrip] = useMutation(ADD_TRIP);
 
+  const createTopic = async (topicName) => {
+    try {
+      const result = await axios({
+        method: "post",
+        url: "https://fvagknn9al.execute-api.us-east-1.amazonaws.com/dev/topic",
+        headers: {
+          "x-api-key": "44bw70Hmoq6ayQ9NvOqY85YTyJ0AbPJL2FniQImB",
+          "Content-Type": "application/json",
+        },
+        data: {
+          topicName,
+        },
+      });
+      console.log(result);
+
+      return result.data.topicArn;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const createSub = async (topicARN, guest) => {
+    try {
+      const result = await axios({
+        method: "post",
+        url:
+          "https://fvagknn9al.execute-api.us-east-1.amazonaws.com/dev/subscribe",
+        headers: {
+          "x-api-key": "44bw70Hmoq6ayQ9NvOqY85YTyJ0AbPJL2FniQImB",
+          "Content-Type": "application/json",
+        },
+        data: {
+          topicArn: topicARN,
+          endpoints: [{ type: "email", value: guest }],
+        },
+      });
+      console.log("create sub res:", result);
+
+      return result;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    //subscribe: after createTopic, subscribeGuests using topicArn & endpoints (email / sms)
-    //ideally add topicArn into database
-    // google-libphonenumber for converting phone numbers to valid e.164 (international numbers - otherwise sms will not work!!!)
-
-    try {
-      const newTrip = await addTrip({
-        variables: {
-          destination: formState.destination,
-          organiser: formState.organiser,
-          // startDate: formState.startDate TODO: nconvert string to unix/decimal
-        },
-      });
-
-      const topicArn = await createTopic(formState.destination);
-
-      console.log(`Topic ARN:::: ${topicArn}`);
-      console.log(`TNew Trip:::: ${newTrip}`);
-
-      setFormState({
-        destination: "",
-        organiser: Auth.getProfile().data._id,
-        startDate: null,
-      });
-    } catch (err) {
-      console.log(err);
+    const topicArn = await createTopic(formState.destination);
+    console.log('topicArn: ', topicArn);
+    for (let i = 0; i <= guests.length; i++) {
+      const guest = guests[i].email
+      const subscription = await createSub(topicArn, guest);
+      console.info("subscribed successfully: ", subscription);
     }
 
-    setFormState({});
+    addTrip({
+      variables: {
+        addTripDestination: formState.destination,
+        addTripStartDate: formState.startDate,
+        //add topicArn
+      },
+    });
   };
+  //subscribe: after createTopic, subscribeGuests using topicArn & endpoints (email / sms)
+  //ideally add topicArn into database
+  //   // google-libphonenumber for converting phone numbers to valid e.164 (international numbers - otherwise sms will not work!!!)
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -140,6 +152,17 @@ const PlanTrip = () => {
             />
           </div>
 
+          <GuestListForm addGuest={addGuest} />
+
+          <div className="flex flex-col mb-4 w-full">
+            <h2 className="mb-2 tracking-wide font-bold text-lg text-gray-800">
+              Guest List
+            </h2>
+            {guests.map((guest, index) => (
+              <GuestList key={index} index={index} guest={guest} />
+            ))}
+          </div>
+
           <button
             className="block bg-green-500 hover:bg-green-400 text-white uppercase text-lg mx-auto p-4 rounded mt-4"
             type="submit"
@@ -147,17 +170,6 @@ const PlanTrip = () => {
             Create Trip
           </button>
         </form>
-
-        <GuestListForm addGuest={addGuest} />
-
-        <div className="flex flex-col mb-4 w-full">
-          <h2 className="mb-2 tracking-wide font-bold text-lg text-gray-800">
-            Guest List
-          </h2>
-          {guests.map((guest, index) => (
-            <GuestList key={index} index={index} guest={guest} />
-          ))}
-        </div>
       </div>
     </div>
   );
