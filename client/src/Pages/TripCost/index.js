@@ -36,9 +36,9 @@ const TripCost = () => {
     try {
         const { data } = await addTripCost({
             variables: {
-                "tripId": tripId,
-                "amount": formState.amount,
-                "description": formState.description
+                tripId: tripId,
+                // amount: formState.amount,
+                description: formState.description
             }
         })
     } catch (err) {
@@ -56,9 +56,10 @@ const TripCost = () => {
           placeholder={0}
           value={formState.amount}
           name="amount"
+          type="number"
           onChange={handleChange}
         ></input>
-        <label>Dexcription</label>
+        <label>Description</label>
         <input
           value={formState.description}
           name="description"
@@ -67,8 +68,8 @@ const TripCost = () => {
         <button type="submit">Add Cost</button>
       </form>
       {costs && 
-        costs.map((cost) => (
-            <h4>{cost.description}</h4>
+        costs.map((cost, index) => (
+            <h4 key={index}>{cost.description}</h4>
         ))}
     </div>
   );
