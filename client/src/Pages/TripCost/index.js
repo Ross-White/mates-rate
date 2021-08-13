@@ -74,18 +74,26 @@ const TripCost = () => {
                 </div>
               </section>
             ))}
-          <form onSubmit={handleFormSubmit}>
+          <form
+            onSubmit={handleFormSubmit}
+            className={trip.organiser === Auth.getProfile().data._id ? 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 visible' : 'invisible'}
+          >
             <input
+              className="form-input mb-4 border-2 w-full rounded-md h-10"
               onChange={handleChange}
               name="amount"
               placeholder="amount"
               value={formState.amount} />
             <input
+              className="form-input mb-4 border-2 w-full rounded-md h-10"
               onChange={handleChange}
               name="description"
               placeholder="description"
               value={formState.description} />
-            <button type="submit">Add Cost</button>
+            <button
+              type="submit"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline btn btn-block btn-info"
+            >Add Cost</button>
           </form>
         </>
       ) : (
