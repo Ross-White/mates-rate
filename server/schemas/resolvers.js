@@ -100,6 +100,9 @@ const resolvers = {
         },
         { new: true }
         );
+        console.log("Trip::::", trip)
+        return trip;
+        
 
     }
   }

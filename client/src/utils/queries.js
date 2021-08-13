@@ -31,6 +31,11 @@ export const QUERY_SINGLE_TRIP = gql`
           name
           email
       }
+      costs {
+        _id
+        amount
+        description
+      }
     }
   }
 `;

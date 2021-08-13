@@ -3,20 +3,19 @@ import { useParams } from "react-router";
 import { useQuery, useMutation } from "@apollo/client";
 import { ADD_TRIPCOST } from "../../utils/mutations";
 import { QUERY_SINGLE_TRIP } from "../../utils/queries";
-import { useEffect } from "react";
 
 const TripCost = () => {
   const { tripId } = useParams();
 
   const { loading, data } = useQuery(QUERY_SINGLE_TRIP, {
-      variables: { tripId: tripId },
+    variables: { tripId: tripId },
   });
 
   const trip = data?.trip || [];
   const costs = trip.costs;
 
   const [formState, setFormState] = useState({
-    amount: 0,
+    amount: '',
     description: "",
   });
 
@@ -26,57 +25,55 @@ const TripCost = () => {
       ...formState,
       [name]: value,
     });
+    console.log("FormState:::", formState);
+
   };
 
-  const [addTripCost] = useMutation(ADD_TRIPCOST)
+  const [addTripCost] = useMutation(ADD_TRIPCOST);
 
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
     const { amount, description } = formState;
-
     try {
-        const { data } = await addTripCost({
-            variables: {
-                tripId: tripId,
-                // amount: formState.amount,
-                description: formState.description
-            }
-        })
+      const { data } = await addTripCost({
+        variables: {
+          "addTripCostTripId": tripId,
+          "addTripCostAmount": amount,
+          "addTripCostDescription": description
+        }
+      })
 
-        setFormState({
-          amount: 0,
-          description: "",
-        })
+
     } catch (err) {
-        console.log(err)
+      console.log(err)
     }
-
   };
 
   return (
     <div>
       <h1>Add costs for trip</h1>
+      {costs &&
+        costs.map((cost) => (
+          <section className="m-4 h-16" >
+            <div className="rounded-full flex flex-row justify-between content-center p-4 bg-gray-200" key={trip._id}>
+              <h4 >£{cost.amount}</h4>
+              <h4 >{cost.description}</h4>
+            </div>
+          </section>
+        ))}
       <form onSubmit={handleFormSubmit}>
-        <label>Amount</label>
         <input
-          placeholder={0}
-          value={formState.amount}
+          onChange={handleChange}
           name="amount"
-          type="number"
-          onChange={handleChange}
-        ></input>
-        <label>Description</label>
+          placeholder="amount"
+          value={formState.amount} />
         <input
-          value={formState.description}
-          name="description"
           onChange={handleChange}
-        ></input>
+          name="description"
+          placeholder="description"
+          value={formState.description} />
         <button type="submit">Add Cost</button>
       </form>
-      {costs && 
-        costs.map((cost, index) => (
-            <h4 key={index}>{cost.description}</h4>
-        ))}
     </div>
   );
 };
