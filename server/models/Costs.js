@@ -1,34 +1,34 @@
-const { Schema, model } = require('mongoose');
+// const { Schema, model } = require('mongoose');
 
-const costSchema = new Schema({
-    trip: {
-        type: Schema.Types.ObjectId,
-        ref: 'Trip',
-    },
-    owner: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-    },
-    amount: {
-        type: Number,
-    },
-    description: {
-        type: String,
-    },
-    users: [{
-        id: {
-            type: Schema.Types.ObjectId,
-            ref: 'User',
-        },
-        paid: {
-            type: Boolean,
-        }
-    }],
-});
+// const costSchema = new Schema({
+//     trip: {
+//         type: Schema.Types.ObjectId,
+//         ref: 'Trip',
+//     },
+//     owner: {
+//         type: Schema.Types.ObjectId,
+//         ref: 'User',
+//     },
+//     amount: {
+//         type: Number,
+//     },
+//     description: {
+//         type: String,
+//     },
+//     users: [{
+//         id: {
+//             type: Schema.Types.ObjectId,
+//             ref: 'User',
+//         },
+//         paid: {
+//             type: Boolean,
+//         }
+//     }],
+// });
 
-const Cost = model('Cost', costSchema);
+// const Cost = model('Cost', costSchema);
 
-module.exports = Cost;
+// module.exports = Cost;
 
 
 // Trip ID
