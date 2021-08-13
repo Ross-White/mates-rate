@@ -60,6 +60,7 @@ const resolvers = {
       return trip;
     },
     addActivity: async (parent, { tripId, date, activity }) => {
+      console.log("HIT");
       return await Trip.findByIdAndUpdate(
         { _id: tripId },
         {
@@ -68,7 +69,7 @@ const resolvers = {
         {
           new: true
         }
-      )
+      );
     },
     addUserToTrip: async (parent, { tripId, guests }) => {
       const guest = await User.findOne({ _id: guests });
