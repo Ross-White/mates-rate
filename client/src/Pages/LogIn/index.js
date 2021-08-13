@@ -38,7 +38,7 @@ export default function SignIn() {
 
   return (
     <main className="flex justify-center">
-    <div className="">
+    <div className="w-full max-w-xs">
       <div className="">
         <h4 className="p-2">Login</h4>
         <div className="card-body">
@@ -48,9 +48,11 @@ export default function SignIn() {
               <Link to="/">back to the homepage.</Link>
             </p>
           ) : (
-            <form onSubmit={handleFormSubmit}>
+            <form 
+              className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+              onSubmit={handleFormSubmit}>
               <input
-                className="form-input"
+                className="form-input mb-4"
                 placeholder="Your email"
                 name="email"
                 type="email"
@@ -58,7 +60,7 @@ export default function SignIn() {
                 onChange={handleChange}
               />
               <input
-                className="form-input"
+                className="form-input mb-4"
                 placeholder="******"
                 name="password"
                 type="password"
@@ -66,7 +68,7 @@ export default function SignIn() {
                 onChange={handleChange}
               />
               <button
-                className="btn btn-block btn-info"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline btn btn-block btn-info"
                 style={{ cursor: 'pointer' }}
                 type="submit"
               >

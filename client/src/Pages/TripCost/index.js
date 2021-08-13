@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { useQuery, useMutation } from "@apollo/client";
 import { ADD_TRIPCOST } from "../../utils/mutations";
 import { QUERY_SINGLE_TRIP } from "../../utils/queries";
+import Auth from '../../utils/auth';
 
 const TripCost = () => {
   const { tripId } = useParams();
@@ -61,7 +62,10 @@ const TripCost = () => {
             </div>
           </section>
         ))}
-      <form onSubmit={handleFormSubmit}>
+      <form 
+        onSubmit={handleFormSubmit}
+        className={trip.organiser === Auth.getProfile()._id ? 'visible' : 'invisible'}
+        >
         <input
           onChange={handleChange}
           name="amount"

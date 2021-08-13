@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_SINGLE_TRIP } from '../../utils/queries';
 import { ADD_ACTIVITY } from '../../utils/mutations';
+import Auth from '../../utils/auth';
 
 const Itinerary = () => {
     const { tripId } = useParams();
@@ -12,6 +13,7 @@ const Itinerary = () => {
     });
 
     const trip = data?.trip || [];
+    console.log(trip);
     const activities = trip.itinerary;
     const [formState, setFormState] = useState({
         date: "",
@@ -48,7 +50,6 @@ const Itinerary = () => {
 
     };
 
-
     return (
         <div>
             <h1>{trip.destination}</h1>
@@ -62,7 +63,9 @@ const Itinerary = () => {
                         </div>
                     </section>
                 ))}
-            <form onSubmit={handleFormSubmit}>
+            <form 
+                className={trip.organiser === Auth.getProfile()._id ? 'visible' : 'invisible'}
+                onSubmit={handleFormSubmit}>
                 <input 
                     onChange={handleChange} 
                     name="date" 
