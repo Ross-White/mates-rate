@@ -54,11 +54,11 @@ const Itinerary = () => {
 
     if (!activities.length && trip.organiser !== Auth.getProfile().data._id) {
         return (
-          <div>
-            <h1>There are no activities planned yet</h1>
-          </div>
+            <div>
+                <h1>There are no activities planned yet</h1>
+            </div>
         )
-      }
+    }
 
     return (
         <div>
@@ -76,18 +76,25 @@ const Itinerary = () => {
                                 </div>
                             </section>
                         ))}
-                    <form onSubmit={handleFormSubmit}>
+                    <form
+                        className={trip.organiser === Auth.getProfile().data._id ? 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 visible' : 'invisible'}
+                        onSubmit={handleFormSubmit}>
                         <input
+                            className="form-input mb-4 border-2 w-full rounded-md h-10"
                             onChange={handleChange}
                             name="date"
                             placeholder="date"
                             value={formState.date} />
                         <input
+                            className="form-input mb-4 border-2 w-full rounded-md h-10"
                             onChange={handleChange}
                             name="activity"
                             placeholder="activity"
                             value={formState.activity} />
-                        <button type="submit">Add Activity</button>
+                        <button
+                            type="submit"
+                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline btn btn-block btn-info"
+                        >Add Activity</button>
                     </form>
                 </>
             ) : (
