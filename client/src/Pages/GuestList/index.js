@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router';
 import { useQuery } from '@apollo/client';
 import { QUERY_SINGLE_TRIP } from '../../utils/queries';
+import Auth from "./../../utils/auth";
 
 const GuestList = () => {
     const { tripId } = useParams();
