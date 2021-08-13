@@ -31,6 +31,15 @@ const tripSchema = new Schema({
     guests: [{
         type: Schema.Types.ObjectId,
         ref: "User"
+    }],
+    costs: [{
+        amount: {
+            type: Number
+        },
+        description: {
+            type: String
+        }
+
     }]
 
 });
