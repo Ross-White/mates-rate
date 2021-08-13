@@ -11,19 +11,23 @@ const GuestList = () => {
     });
     console.log(data)
     const guests = data.trip.guests || [];
-    console.log(data.trip.guests);
     return (
         <div>
             {guests &&
-            guests.map((guest) => (
-                <section className="m-4 h-16" >
-                    <div className="rounded-full flex flex-row justify-between content-center p-4 bg-gray-200" key={guest._id}>
-                        <h4 className="">{guest.name}</h4>
-                    </div>
-                </section>
-            ))}
+                guests.map((guest) => (
+                    <section className="m-4 h-16" >
+                        <div className="border-2 shadow-md rounded-full flex flex-row justify-between content-center p-4 bg-gray-200" key={guest._id}>
+                            <h4 className="">{guest.name}</h4>
+                        </div>
+                    </section>
+                ))}
+            {/* <section className="m-4 h-16" >
+                <div className="border-2 shadow-md rounded-full flex flex-row justify-between content-center p-4 bg-gray-200" key={data.trip.organiser}>
+                    <h4 className="">Organiser: {data.trip.organiser}</h4>
+                </div>
+            </section> */}
         </div>
-        
+
     );
 };
 

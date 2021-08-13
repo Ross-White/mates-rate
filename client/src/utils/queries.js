@@ -18,7 +18,8 @@ export const QUERY_USER_TRIPS = gql`
 export const QUERY_SINGLE_TRIP = gql`
   query getSingleTrip($tripId: ID!) {
     trip(tripId: $tripId) {
-      _id          
+      _id      
+      organiser    
       destination
       startDate
       itinerary {

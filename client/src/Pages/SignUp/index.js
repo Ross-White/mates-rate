@@ -50,9 +50,11 @@ const Signup = () => {
                 <Link to="/">back to the homepage.</Link>
               </p>
             ) : (
-              <form onSubmit={handleFormSubmit}>
+              <form 
+                className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+                onSubmit={handleFormSubmit}>
                 <input
-                  className="form-input"
+                  className="form-input mb-4 border-2 w-full rounded-md h-10"
                   placeholder="Your name"
                   name="name"
                   type="text"
@@ -60,7 +62,7 @@ const Signup = () => {
                   onChange={handleChange}
                 />
                 <input
-                  className="form-input"
+                  className="form-input mb-4 border-2 w-full rounded-md h-10"
                   placeholder="Your email"
                   name="email"
                   type="email"
@@ -68,7 +70,7 @@ const Signup = () => {
                   onChange={handleChange}
                 />
                 <input
-                  className="form-input"
+                  className="form-input mb-4 border-2 w-full rounded-md h-10"
                   placeholder="******"
                   name="password"
                   type="password"

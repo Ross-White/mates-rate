@@ -130,7 +130,7 @@ const PlanTrip = () => {
               Start date
             </label>
             <input
-              value=""
+              value={formState.startDate}
               type="date"
               name="startDate"
               id="startDate"
@@ -139,7 +139,7 @@ const PlanTrip = () => {
             />
           </div>
 
-          <div className="flex flex-col mb-4 md:w1/2">
+          {/* <div className="flex flex-col mb-4 md:w1/2">
             <label className="mb-2 tracking-wide font-bold text-lg text-gray-800">
               Organiser
             </label>
@@ -151,7 +151,7 @@ const PlanTrip = () => {
               onChange={handleChange}
               className="border py-2 px-3 text-grey-darkest md:mr-2"
             />
-          </div>
+          </div> */}
 
           <GuestListForm addGuest={addGuest} />
 

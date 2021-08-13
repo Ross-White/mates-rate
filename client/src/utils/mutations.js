@@ -29,6 +29,7 @@ export const ADD_TRIP = gql`
     addTrip(destination: $destination, startDate: $startDate) {
       destination
       organiser
+      startDate
     }
   }
 `;

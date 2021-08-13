@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import { useQuery, useMutation } from "@apollo/client";
 import { ADD_TRIPCOST } from "../../utils/mutations";
 import { QUERY_SINGLE_TRIP } from "../../utils/queries";
-import Auth from "./../../utils/auth";
+import Auth from '../../utils/auth';
 
 
 const TripCost = () => {
@@ -51,8 +51,17 @@ const TripCost = () => {
     }
   };
 
+  if (!costs.length && trip.organiser !== Auth.getProfile().data._id) {
+    return (
+      <div>
+        <h1>No costs submitted for this trip yet</h1>
+      </div>
+    )
+  }
+
   return (
     <div>
+
       {Auth.loggedIn() ? (
         <>
           <h1>Add costs for trip</h1>

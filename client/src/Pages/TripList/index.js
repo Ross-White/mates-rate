@@ -14,7 +14,13 @@ const TripList = () => {
         console.log("no data found")
     }
     const trips = user.userTrips.trips;
-
+    if (!trips.length) {
+        return (
+        <div>
+            <h1>You don't have any trips yet</h1>
+        </div>
+        )
+    }
 
     return (
 
