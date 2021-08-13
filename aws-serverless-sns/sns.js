@@ -4,7 +4,7 @@ const AWS = require("aws-sdk");
 const headersCors = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Credentials': true,
-},
+}
 
 const sns = new AWS.SNS();
 
@@ -36,6 +36,7 @@ const createTopic = async (event) => {
     console.error(err);
     return {
       statusCode: 500,
+      headers: headersCors,
       body: JSON.stringify(
         {
           message: `Topic creation error`,
@@ -85,6 +86,7 @@ const subscribeTopic = async ({ body }) => {
   } catch (err) {
     return {
       statusCode: 500,
+      headers: headersCors,
       body: JSON.stringify(
         {
           message: `Subscription was unsuccesful.`,
