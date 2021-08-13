@@ -34,12 +34,13 @@ const Itinerary = () => {
         const date = formState.date;
         const activity = formState.activity
         try {
+            console.log(tripId, date,activity)
             const { data } = await addActivity({
-                variables: {
-                    tripId,
-                    date,
-                    activity,
-                }
+                variables: { 
+                    "addActivityTripId": tripId,
+                    "addActivityDate": date,
+                    "addActivityActivity": activity
+                  }
             });
         } catch (err) {
             console.error(err)

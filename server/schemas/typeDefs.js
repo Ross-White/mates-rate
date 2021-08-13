@@ -20,7 +20,7 @@ const typeDefs = gql`
 
   type Activity {
     _id: ID
-    date: Float
+    date: String
     activity: String
   }
 
@@ -40,7 +40,7 @@ const typeDefs = gql`
     addUser(name: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     addTrip(destination: String!, organiser: String startDate: Float): Trip
-    addActivity(tripId: ID!, date: Float!, activity: String!): [Trip]
+    addActivity(tripId: ID!, date: String!, activity: String!): Trip
     addUserToTrip(tripId: ID!, guests: ID!): Trip
   }
 `;

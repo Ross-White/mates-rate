@@ -25,8 +25,8 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_TRIP = gql`
-  mutation Mutation($organiser: String!, $destination: String!, $startDate: Float) {
-    addTrip(organiser: $organiser, destination: $destination, startDate: $startDate) {
+  mutation Mutation($destination: String!, $startDate: Float) {
+    addTrip(destination: $destination, startDate: $startDate) {
       destination
       organiser
     }
@@ -34,14 +34,14 @@ export const ADD_TRIP = gql`
 `;
 
 export const ADD_ACTIVITY = gql`
-  mutation addActivity($tripId: [ID]!, $date: Float!, $activity: String!) {
-    addActivity(tripId: $tripId, date: $date, activity: $activity) {
-      _id
-      destination
-      itinerary {
-        date
-        activity
-      }
+mutation Mutation($addActivityTripId: ID!, $addActivityDate: String!, $addActivityActivity: String!) {
+  addActivity(tripId: $addActivityTripId, date: $addActivityDate, activity: $addActivityActivity) {
+    _id
+    destination
+    itinerary {
+      date
+      activity
     }
   }
+}
 `;
