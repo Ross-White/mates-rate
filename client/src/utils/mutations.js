@@ -45,3 +45,16 @@ mutation Mutation($addActivityTripId: ID!, $addActivityDate: String!, $addActivi
   }
 }
 `;
+
+export const ADD_TRIPCOST = gql`
+mutation addTripCost($tripId: ID!, $amount: Number, $description: String) {
+  addTripCost(tripId: $tripId, amount: $amount, description: $description) {
+    _id
+    destination
+    costs {
+      amount
+      description
+    }
+  }
+}
+`;
