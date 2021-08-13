@@ -4,8 +4,8 @@ import { useQuery, useMutation } from "@apollo/client";
 
 const TripCost = () => {
   const [formState, setFormState] = useState({
+    amount: 0,
     description: "",
-    amount: "",
   });
 
   const handleChange = (event) => {
@@ -18,8 +18,8 @@ const TripCost = () => {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-        const amount = formState.amount;
-        const description = formState.description;
+        const { amount, description } = formState;
+
     }
 
 
