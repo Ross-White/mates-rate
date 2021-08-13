@@ -50,6 +50,14 @@ const Itinerary = () => {
 
     };
 
+    if (!activities.length && trip.organiser !== Auth.getProfile().data._id) {
+        return (
+          <div>
+            <h1>There are no activities planned yet</h1>
+          </div>
+        )
+      }
+
     return (
         <div>
             <h1>{trip.destination}</h1>

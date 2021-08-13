@@ -50,6 +50,14 @@ const TripCost = () => {
     }
   };
 
+  if (!costs.length && trip.organiser !== Auth.getProfile().data._id) {
+    return (
+      <div>
+        <h1>No costs submitted for this trip yet</h1>
+      </div>
+    )
+  }
+
   return (
     <div>
       <h1>Add costs for trip</h1>
@@ -78,10 +86,10 @@ const TripCost = () => {
           name="description"
           placeholder="description"
           value={formState.description} />
-        <button 
+        <button
           type="submit"
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline btn btn-block btn-info"
-          >Add Cost</button>
+        >Add Cost</button>
       </form>
     </div>
   );
