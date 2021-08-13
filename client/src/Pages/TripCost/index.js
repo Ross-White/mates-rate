@@ -56,27 +56,32 @@ const TripCost = () => {
       {costs &&
         costs.map((cost) => (
           <section className="m-4 h-16" >
-            <div className="rounded-full flex flex-row justify-between content-center p-4 bg-gray-200" key={trip._id}>
+            <div className="border-2 shadow-md rounded-full flex flex-row justify-between content-center p-4 bg-gray-200" key={trip._id}>
               <h4 >£{cost.amount}</h4>
               <h4 >{cost.description}</h4>
             </div>
           </section>
         ))}
-      <form 
+      <form
         onSubmit={handleFormSubmit}
-        className={trip.organiser === Auth.getProfile()._id ? 'visible' : 'invisible'}
-        >
+        className={trip.organiser === Auth.getProfile().data._id ? 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 visible' : 'invisible'}
+      >
         <input
+          className="form-input mb-4 border-2 w-full rounded-md h-10"
           onChange={handleChange}
           name="amount"
           placeholder="amount"
           value={formState.amount} />
         <input
+          className="form-input mb-4 border-2 w-full rounded-md h-10"
           onChange={handleChange}
           name="description"
           placeholder="description"
           value={formState.description} />
-        <button type="submit">Add Cost</button>
+        <button 
+          type="submit"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline btn btn-block btn-info"
+          >Add Cost</button>
       </form>
     </div>
   );

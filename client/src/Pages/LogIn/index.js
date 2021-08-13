@@ -52,7 +52,7 @@ export default function SignIn() {
               className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
               onSubmit={handleFormSubmit}>
               <input
-                className="form-input mb-4"
+                className="form-input mb-4 border-2 w-full rounded-md h-10"
                 placeholder="Your email"
                 name="email"
                 type="email"
@@ -60,7 +60,7 @@ export default function SignIn() {
                 onChange={handleChange}
               />
               <input
-                className="form-input mb-4"
+                className="form-input mb-4 border-2 w-full rounded-md h-10"
                 placeholder="******"
                 name="password"
                 type="password"
