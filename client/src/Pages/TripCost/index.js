@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { useQuery, useMutation } from "@apollo/client";
 import { ADD_TRIPCOST } from "../../utils/mutations";
 import { QUERY_SINGLE_TRIP } from "../../utils/queries";
+import { useEffect } from "react";
 
 const TripCost = () => {
   const { tripId } = useParams();
@@ -40,6 +41,11 @@ const TripCost = () => {
                 // amount: formState.amount,
                 description: formState.description
             }
+        })
+
+        setFormState({
+          amount: 0,
+          description: "",
         })
     } catch (err) {
         console.log(err)
