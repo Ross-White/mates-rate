@@ -9,7 +9,7 @@ const Home = () => {
       {Auth.loggedIn() ? (
         <>
           <h1 className="block w-full text-center md:text-left text-green-400 my-6 text-5xl">
-            Welcome, {Auth.getProfile().data.email}
+            Welcome, {Auth.getProfile().data.name}
           </h1>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

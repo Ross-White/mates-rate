@@ -11,7 +11,7 @@ import GuestList from "../../components/GuestList";
 const PlanTrip = () => {
   const [formState, setFormState] = useState({
     destination: "",
-    startDate: null,
+    startDate: "",
     organiser: Auth.getProfile().data._id,
   });
 
@@ -101,6 +101,8 @@ const PlanTrip = () => {
 
   return (
     <div className="flex items-center h-screen w-full bg-green-50">
+            {Auth.loggedIn() ? (
+        <>
       <div className="w-full bg-white rounded shadow-lg p-8 m-4 md:max-w-sm md:mx-auto">
         <h2 className="block w-full text-center text-gray-900 mb-6">
           Plan new trip
@@ -170,6 +172,12 @@ const PlanTrip = () => {
           </button>
         </form>
       </div>
+      </>
+      ) : (
+        <h1 className="block w-full text-center text-gray-900 mb-6">
+          You must log in first
+        </h1>
+      )}
     </div>
   );
 };
