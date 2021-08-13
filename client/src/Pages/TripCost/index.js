@@ -32,15 +32,28 @@ const TripCost = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const { amount, description } = formState;
+
+    try {
+        const { data } = await addTripCost({
+            variables: {
+                "tripId": tripId,
+                "amount": formState.amount,
+                "description": formState.description
+            }
+        })
+    } catch (err) {
+        console.log(err)
+    }
+
   };
 
   return (
     <div>
       <h1>Add costs for trip</h1>
-      <form>
+      <form onSubmit={handleFormSubmit}>
         <label>Amount</label>
         <input
-          placeholder="£"
+          placeholder={0}
           value={formState.amount}
           name="amount"
           onChange={handleChange}
@@ -51,7 +64,12 @@ const TripCost = () => {
           name="description"
           onChange={handleChange}
         ></input>
+        <button type="submit">Add Cost</button>
       </form>
+      {costs && 
+        costs.map((cost) => (
+            <h4>{cost.description}</h4>
+        ))}
     </div>
   );
 };

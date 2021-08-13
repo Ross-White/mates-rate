@@ -34,7 +34,7 @@ const tripSchema = new Schema({
     }],
     costs: [{
         amount: {
-            type: Number
+            type: String
         },
         description: {
             type: String

@@ -21,7 +21,7 @@ const typeDefs = gql`
 
   type Cost {
     _id: ID
-    amount: Number
+    amount: String
     description: String
   }
 
@@ -49,7 +49,7 @@ const typeDefs = gql`
     addTrip(destination: String!, organiser: String startDate: Float): Trip
     addActivity(tripId: ID!, date: String!, activity: String!): Trip
     addUserToTrip(tripId: ID!, guests: ID!): Trip
-    addTripCost(tripId: ID!, amount: Number, description: String): Trip
+    addTripCost(tripId: ID!, amount: String, description: String): Trip
   }
 `;
 
