@@ -91,6 +91,19 @@ const resolvers = {
       console.log("Udated Trip::::", updatedTrip);
       console.log("Udated User::::", updatedUser);
       return updatedTrip, updatedUser
+    },
+    addTripCost: async (parent, { tripId, amount, description }) => {
+      const trip = await Trip.findOneAndUpdate(
+        { _id: tripId },
+        {
+          $addToSet: { costs: { amount, description }},
+        },
+        { new: true }
+        );
+        console.log("Trip::::", trip)
+        return trip;
+        
+
     }
   }
 };

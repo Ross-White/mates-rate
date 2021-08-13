@@ -31,10 +31,8 @@ const Itinerary = () => {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        const date = formState.date;
-        const activity = formState.activity
+        const { date, activity } = formState;
         try {
-            console.log(tripId, date,activity)
             const { data } = await addActivity({
                 variables: { 
                     "addActivityTripId": tripId,
@@ -42,6 +40,7 @@ const Itinerary = () => {
                     "addActivityActivity": activity
                   }
             });
+
         } catch (err) {
             console.error(err)
         }
