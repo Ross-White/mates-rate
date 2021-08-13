@@ -16,6 +16,13 @@ const typeDefs = gql`
     organiser: ID
     itinerary: [Activity]
     guests: [User]
+    costs: [Cost]
+  }
+
+  type Cost {
+    _id: ID
+    amount: Number
+    description: String
   }
 
   type Activity {
@@ -42,6 +49,7 @@ const typeDefs = gql`
     addTrip(destination: String!, organiser: String startDate: Float): Trip
     addActivity(tripId: ID!, date: String!, activity: String!): Trip
     addUserToTrip(tripId: ID!, guests: ID!): Trip
+    addTripCost(tripId: ID!, amount: Number, description: String): Trip
   }
 `;
 
