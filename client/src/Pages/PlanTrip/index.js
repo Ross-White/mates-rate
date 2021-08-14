@@ -121,7 +121,7 @@ const PlanTrip = () => {
   };
 
   const addGuest = (email) => {
-    const newGuests = [...guests, { email }];
+    const newGuests = [...guests, email ];
     setGuests(newGuests);
   };
 
