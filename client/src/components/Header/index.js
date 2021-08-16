@@ -9,13 +9,12 @@ const Header = () => {
     Auth.logout();
   };
   return (
-      <header className="bg-gray-100 text-gray-500 mb-4 py-4 flex align-middle">
+      <header className="bg-blue-100 text-blue-500 mb-4 py-4 flex align-middle">
           <div className="container flex md:justify-between justify-center">
               <div className="mx-8">
                   <Link className="text-blue-400" to="/">
-                      <h1 className="m-0 text-2xl text-blue-900">Mates Rates</h1>
+                      <h1 className="m-0 text-4xl font-black text-blue-500">Mates Rates</h1>
                   </Link>
-                  <p className="m-0">Lorem ipsum dolor sit amet</p>
               </div>
               <div>
                   {Auth.loggedIn() ? (
