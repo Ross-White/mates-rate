@@ -7,7 +7,7 @@ const tripSchema = new Schema({
         trim: true,
     },
     startDate: {
-        type: String,
+        type: Date,
     },
     organiser: {
         type: Schema.Types.ObjectId,
