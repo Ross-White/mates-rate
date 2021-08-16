@@ -63,30 +63,30 @@ const PlanTrip = () => {
     }
   };
 
-  const publishMessage = async (topicARN, guest) => {
-    try {
-      const result = await axios({
-        method: "post",
-        url:
-        "https://fvagknn9al.execute-api.us-east-1.amazonaws.com/dev/publish",
-        headers: {
-          "x-api-key": "44bw70Hmoq6ayQ9NvOqY85YTyJ0AbPJL2FniQImB",
-          "Content-Type": "application/json",
-        },
-        data: {
-          topicArn: topicARN,
-          message: `You have been invited to join the ${topicName} trip. Please sign up to Mates Rates at: http://mates-rates.heroku.com/signup`,
-          subject: `Mates Rates - ${topicName} trip`,
-          senderId: "Mates Rates",
-        },
-      });
-      console.log("publish message:", result);
+  // const publishMessage = async (topicARN, guest) => {
+  //   try {
+  //     const result = await axios({
+  //       method: "post",
+  //       url:
+  //       "https://fvagknn9al.execute-api.us-east-1.amazonaws.com/dev/publish",
+  //       headers: {
+  //         "x-api-key": "44bw70Hmoq6ayQ9NvOqY85YTyJ0AbPJL2FniQImB",
+  //         "Content-Type": "application/json",
+  //       },
+  //       data: {
+  //         topicArn: topicARN,
+  //         message: `You have been invited to join the ${topicName} trip. Please sign up to Mates Rates at: http://mates-rates.heroku.com/signup`,
+  //         subject: `Mates Rates - ${topicName} trip`,
+  //         senderId: "Mates Rates",
+  //       },
+  //     });
+  //     console.log("publish message:", result);
 
-      return result;
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  //     return result;
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
 
   const handleFormSubmit = async (e) => {
