@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useLazyQuery, useMutation } from '@apollo/client';
 import Auth from '../../utils/auth';
 import { QUERY_SINGLE_TRIP } from '../../utils/queries';
+import { ADD_USER_TO_TRIP } from '../../utils/mutations';
 
 
 
@@ -9,7 +10,8 @@ const JoinTrip = () => {
     const [formState, setFormState] = useState({ tripId: '' });
     const [getTrip, { loading, data }] = useLazyQuery(QUERY_SINGLE_TRIP);
     const trip = data?.trip || [];
-    console.log("Trip:::", trip);
+
+    const [addUserToTrip] = useMutation(ADD_USER_TO_TRIP);
 
 
     const handleChange = (event) => {
@@ -24,10 +26,16 @@ const JoinTrip = () => {
         getTrip({ variables: { tripId: formState.tripId } });
     };
 
-    const JoinTrip = (event) => {
+    const addToTrip = (event) => {
         event.preventDefault();
-        console.log("Click Worked!!!", event.target.value)
-    }
+        console.log("Click Worked!!!", event.target.value);
+        addUserToTrip({
+            variables: {  
+                "addUserToTripTripId": event.target.value,
+                "addUserToTripGuests": Auth.getProfile().data._id
+          }
+        })
+    };
 
 
     return (
@@ -56,10 +64,10 @@ const JoinTrip = () => {
                             </div>
                         </section>
                         <button
-                            onClick={JoinTrip}
+                            onClick={addToTrip}
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline btn btn-block btn-info"
                             value={trip._id}
-                            >
+                        >
                             Click to join trip
                         </button>
                     </div>

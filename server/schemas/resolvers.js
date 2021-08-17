@@ -19,9 +19,7 @@ const resolvers = {
     },
 
     trip: async (parent, args) => {
-      console.log("TripId", args.tripId);
       const trip = await Trip.findById(args.tripId).populate('guests');
-      console.log("Trip:::", trip);
       return trip;
     }
   },
@@ -76,6 +74,7 @@ const resolvers = {
     },
     addUserToTrip: async (parent, { tripId, guests }) => {
       const guest = await User.findOne({ _id: guests });
+      console.log("Guest:::", guest)
       const trip = await Trip.findOne({ _id: tripId });
       const updatedTrip = await Trip.findOneAndUpdate(
         { _id: tripId },
