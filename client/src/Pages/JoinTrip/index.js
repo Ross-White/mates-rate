@@ -26,15 +26,16 @@ const JoinTrip = () => {
         getTrip({ variables: { tripId: formState.tripId } });
     };
 
-    const addToTrip = (event) => {
-        event.preventDefault();
-        console.log("Click Worked!!!", event.target.value);
-        addUserToTrip({
-            variables: {  
-                "addUserToTripTripId": event.target.value,
-                "addUserToTripGuests": Auth.getProfile().data._id
-          }
-        })
+    const addToTrip = async (event) => {
+            addUserToTrip({
+                variables: {
+                    "addUserToTripTripId": event.target.value,
+                    "addUserToTripGuests": Auth.getProfile().data._id
+                }
+            })
+            console.log("Success, you have now been added to the trip!!");
+            alert('You have now been added to the trip');
+            window.location.assign("/triplist");
     };
 
 
