@@ -40,3 +40,4 @@ export const QUERY_SINGLE_TRIP = gql`
     }
   }
 `;
+

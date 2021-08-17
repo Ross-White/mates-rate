@@ -19,7 +19,10 @@ const resolvers = {
     },
 
     trip: async (parent, args) => {
-      return await Trip.findById(args.tripId).populate('guests');
+      console.log("TripId", args.tripId);
+      const trip = await Trip.findById(args.tripId).populate('guests');
+      console.log("Trip:::", trip);
+      return trip;
     }
   },
 
