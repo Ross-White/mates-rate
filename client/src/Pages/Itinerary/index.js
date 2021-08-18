@@ -82,6 +82,7 @@ const Itinerary = () => {
                         <input
                             className="form-input mb-4 border-2 w-full rounded-md h-10"
                             onChange={handleChange}
+                            type="date"
                             aria-label="date"
                             name="date"
                             placeholder="date"

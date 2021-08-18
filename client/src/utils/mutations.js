@@ -58,3 +58,14 @@ mutation Mutation($addTripCostTripId: ID!, $addTripCostAmount: String, $addTripC
   }
 }
 `;
+
+export const ADD_USER_TO_TRIP = gql`
+  mutation Mutation($addUserToTripTripId: ID!, $addUserToTripGuests: ID!) {
+    addUserToTrip(tripId: $addUserToTripTripId, guests: $addUserToTripGuests) {
+      destination
+      guests {
+        name
+      }
+    }
+  }
+`;
