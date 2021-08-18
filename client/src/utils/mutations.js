@@ -50,6 +50,7 @@ mutation Mutation($addActivityTripId: ID!, $addActivityDate: String!, $addActivi
 export const ADD_TRIPCOST = gql`
 mutation Mutation($addTripCostTripId: ID!, $addTripCostAmount: String, $addTripCostDescription: String) {
   addTripCost(tripId: $addTripCostTripId, amount: $addTripCostAmount, description: $addTripCostDescription) {
+    _id
     destination
     costs {
       amount
