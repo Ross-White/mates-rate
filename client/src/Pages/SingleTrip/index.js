@@ -19,7 +19,7 @@ const SingleTrip = () => {
     }
 
     return (
-        <div className="container mx-auto flex flex-col justify-center">
+        <div className="container mx-auto min-h-screen flex flex-col my-4">
             {Auth.loggedIn() ? (
                 <>
                     <div className="flex rounded-full bg-gray-200 w-full justify-center h-16 p-4 text-lg">

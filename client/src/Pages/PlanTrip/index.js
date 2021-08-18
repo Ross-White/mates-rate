@@ -126,7 +126,7 @@ const PlanTrip = () => {
   };
 
   return (
-    <div className="flex items-center h-screen w-full bg-green-50">
+    <div className="flex items-center h-screen w-full">
             {Auth.loggedIn() ? (
         <>
       <div className="w-full bg-white rounded shadow-lg p-8 m-4 md:max-w-sm md:mx-auto">
@@ -147,7 +147,7 @@ const PlanTrip = () => {
               name="destination"
               id="destination"
               onChange={handleChange}
-              className="border py-2 px-3 text-grey-darkest md:mr-2"
+              className="border rounded border-gray-100 py-2 px-3 text-grey-darkest md:mr-2"
             />
           </div>
 
@@ -161,7 +161,7 @@ const PlanTrip = () => {
               name="startDate"
               id="startDate"
               onChange={handleChange}
-              className="border py-2 px-3 text-grey-darkest md:mr-2"
+              className="border rounded border-gray-100 py-2 px-3 text-grey-darkest md:mr-2"
             />
           </div>
 

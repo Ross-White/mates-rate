@@ -18,7 +18,7 @@ const GuestListForm = ({ addGuest }) => {
           </label>
           <input
             type="email"
-            className="border py-2 px-3 text-grey-darkest md:mr-2"
+            className="border rounded border-gray-100 py-2 px-3 text-grey-darkest md:mr-2"
             value={value}
             onChange={(e) => setValue(e.target.value)}
           />

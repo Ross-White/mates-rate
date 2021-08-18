@@ -24,7 +24,7 @@ const TripList = () => {
 
     return (
 
-        <div>
+        <div className="min-h-screen">
             {Auth.loggedIn() ? (
                 <div>
                     {trips &&

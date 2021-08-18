@@ -4,6 +4,12 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+const bgStyle = {
+  backgroundColor: '#f2f2fb',
+  opacity: 0.2,
+  backgroundImage: 'radial-gradient(#090e5d 1.85px, #f2f2fb 1.85px);',
+  backgroundSize: '67px 67px'
+}
 
 ReactDOM.render(
   <React.StrictMode>
