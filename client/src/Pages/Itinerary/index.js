@@ -82,12 +82,14 @@ const Itinerary = () => {
                         <input
                             className="form-input mb-4 border-2 w-full rounded-md h-10"
                             onChange={handleChange}
+                            aria-label="date"
                             name="date"
                             placeholder="date"
                             value={formState.date} />
                         <input
                             className="form-input mb-4 border-2 w-full rounded-md h-10"
                             onChange={handleChange}
+                            aria-label="activity"
                             name="activity"
                             placeholder="activity"
                             value={formState.activity} />
