@@ -14,7 +14,9 @@ const TripCost = () => {
   });
 
   const trip = data?.trip || [];
+  console.log("Trip:::", trip);
   const costs = trip.costs;
+  console.log("Costs:::", costs)
 
   const [formState, setFormState] = useState({
     amount: '',
@@ -43,11 +45,10 @@ const TripCost = () => {
           "addTripCostAmount": amount,
           "addTripCostDescription": description
         }
-      })
-
-
+      });
+      console.log("data: ", data);
     } catch (err) {
-      console.log(err)
+      console.error(err);
     }
   };
 
@@ -60,6 +61,7 @@ const TripCost = () => {
   }
 
   return (
+
     <div className="min-h-screen container mx-auto">
 
       {Auth.loggedIn() ? (
@@ -75,8 +77,8 @@ const TripCost = () => {
               </section>
             ))}
           <form
-            onSubmit={handleFormSubmit}
             className={trip.organiser === Auth.getProfile().data._id ? 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 visible' : 'invisible'}
+            onSubmit={handleFormSubmit}
           >
             <input
               className="form-input mb-4 border-2 w-full rounded-md h-10"

@@ -61,7 +61,6 @@ const resolvers = {
       return trip;
     },
     addActivity: async (parent, { tripId, date, activity }) => {
-      console.log("HIT");
       return await Trip.findByIdAndUpdate(
         { _id: tripId },
         {
@@ -95,17 +94,13 @@ const resolvers = {
       return updatedTrip, updatedUser
     },
     addTripCost: async (parent, { tripId, amount, description }) => {
-      const trip = await Trip.findOneAndUpdate(
+      return await Trip.findByIdAndUpdate(
         { _id: tripId },
         {
           $addToSet: { costs: { amount, description }},
         },
         { new: true }
-        );
-        console.log("Trip::::", trip)
-        return trip;
-        
-
+        );       
     }
   }
 };
