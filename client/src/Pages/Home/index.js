@@ -38,6 +38,27 @@ const Home = () => {
         </>
       ) : (
         <div className="flex flex-wrap gap-6">
+
+
+          <div className="md:hidden inline-flex justify-evenly w-full bg-blue-50 rounded-lg shadow">
+            <Link
+              to="/signup"
+              className="mx-2 text-blue-500 text-center text-3xl"
+            >
+              Sign up
+            </Link>
+            <Link
+              to="/login"
+              className="mx-2 text-blue-500 text-center text-3xl"
+            >
+              Login
+            </Link>
+          </div>
+
+          <div className="flex-initial inline-flex items-center w-full bg-blue-600 rounded-lg shadow p-2">
+            <h3 className="text-4xl md:text-5xl mx-4 text-blue-50 text-center">Take the hassel out of planning those big group trips</h3>
+          </div>
+
           <div className="flex-initial inline-flex items-center h-48 w-full bg-blue-50 rounded-lg shadow">
             <div className="flex-0 h-48">
               <FaUserFriends className="mx-1 text-blue-500" size="md" />
@@ -49,7 +70,7 @@ const Home = () => {
 
           <div className="flex-initial inline-flex items-center h-48 w-full bg-blue-50 rounded-lg shadow">
             <h3 className="mx-2 text-blue-500 text-center text-3xl">
-              Take the hassel out of splitting the total trip cost
+              Track spending and split the final cost
             </h3>
             <div className="flex-0 h-48">
               <RiMoneyPoundCircleFill className="text-blue-500" size="md" />
@@ -61,7 +82,7 @@ const Home = () => {
               <BiMessageCheck className="text-blue-500" size="md" />
             </div>
             <h3 className="ml-8 text-blue-500 text-center text-3xl">
-              Plan your trip and invite friends
+              Send messages to your group
             </h3>
           </div>
         </div>
