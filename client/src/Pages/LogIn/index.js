@@ -37,10 +37,9 @@ export default function SignIn() {
   };
 
   return (
-    <main className="flex justify-center">
+    <main className="flex justify-center min-h-screen">
     <div className="w-full max-w-xs">
       <div className="">
-        <h4 className="p-2">Login</h4>
         <div className="card-body">
           {data ? (
             <p>

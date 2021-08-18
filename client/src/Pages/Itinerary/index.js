@@ -61,7 +61,7 @@ const Itinerary = () => {
     }
 
     return (
-        <div>
+        <div className="min-h-screen mx-auto container">
 
             {Auth.loggedIn() ? (
                 <>

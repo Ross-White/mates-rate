@@ -12,22 +12,23 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "autoprefixer": "^10.3.1",
     "axios": "^0.21.1",
     "graphql": "^15.5.1",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.1.2",
     "mongoose": "^5.13.5",
+    "postcss": "^8.3.6",
     "postcss-cli": "^8.3.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-icons": "^4.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-validation": "^3.0.7",
+    "tailwindcss": "^2.2.7",
     "validator": "^13.6.0",
-    "web-vitals": "^1.1.2",
-    "autoprefixer": "^10.3.1",
-    "postcss": "^8.3.6",
-    "tailwindcss": "^2.2.7"
+    "web-vitals": "^1.1.2"
   },
   "scripts": {
     "start": "npm run watch:css && react-scripts start",
@@ -54,6 +55,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+
   },
   "devDependencies": {}
+
 }
