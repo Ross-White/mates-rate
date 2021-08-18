@@ -61,7 +61,8 @@ const TripCost = () => {
   }
 
   return (
-    <div className="min-h-screen mx-auto container">
+
+    <div className="min-h-screen container mx-auto">
 
       {Auth.loggedIn() ? (
         <>

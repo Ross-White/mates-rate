@@ -40,10 +40,10 @@ const JoinTrip = () => {
 
 
     return (
-        <div>
+        <div className="min-h-screen container mx-auto">
             {Auth.loggedIn() ? (
                 <>
-                    <form onSubmit={HandleSearchTrip}>
+                    <form onSubmit={HandleSearchTrip} className="my-6">
                         <input
                             className="form-input mb-4 border-2 w-full rounded-md h-10"
                             onChange={handleChange}
