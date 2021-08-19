@@ -29,19 +29,16 @@ const TripList = () => {
                 <div>
                     {trips &&
                         trips.map((trip) => (
-                            <section className="m-4 h-16" >
-                                <div className="rounded-full flex flex-row justify-between content-center p-4 bg-gray-200" key={trip._id}>
-                                    <h4 className="">{trip.destination}</h4>
+                            <Link to={`trips/${trip._id}`}>
+                            <section className="m-4" >
+                                <div className="inline-flex items-center w-full bg-blue-50 h-16 rounded-full shadow" key={trip._id}>
+                                    <h4 className="p-8 text-5xl text-blue-500 font-black">{trip.destination}</h4>
 
                                     <h4 className="">{trip.startDate}</h4>
-
-                                    <Link to={`trips/${trip._id}`}
-                                        className=""
-                                    >
-                                        View
-                                    </ Link>
                                 </div>
                             </section>
+                            </Link>
+                            
                         ))}
                 </div>
             ) : (

@@ -22,24 +22,24 @@ const SingleTrip = () => {
         <div className="container mx-auto min-h-screen flex flex-col my-4">
             {Auth.loggedIn() ? (
                 <>
-                    <div className="flex rounded-full bg-gray-200 w-full justify-center h-16 p-4 text-lg">
-                        <h1>{trip.destination}</h1>
+                    <div className="flex rounded-full bg-blue-500 w-full justify-center h-16 p-4 text-lg shadow">
+                        <h1 className="font-black text-4xl text-blue-50">{trip.destination}</h1>
                     </div>
                     <div>
                         <div>
                             <div className="container grid grid-cols-2">
-                                <div className="rounded-full w-full h-48 flex items-center justify-center my-4 mr-2 bg-gray-200">
+                                <div className="rounded-full w-full h-48 flex items-center justify-center my-4 mr-2 bg-blue-500 shadow">
                                     <Link to={`itinerary/${trip._id}`}>
                                         Itinerary
                                     </Link>
                                 </div>
-                                <div className="rounded-full w-full h-48 flex items-center justify-center my-4 ml-2 bg-gray-200">
+                                <div className="rounded-full w-full h-48 flex items-center justify-center my-4 ml-2 bg-blue-500 shadow">
                                     <Link to={`guestlist/${trip._id}`}>
                                         Guest List
                                     </Link>
                                 </div>
                             </div>
-                            <div className="rounded-full w-full h-60 flex items-center justify-center my-4 bg-gray-200">
+                            <div className="rounded-full w-full h-60 flex items-center justify-center my-4 bg-blue-500 shadow">
                                 <Link to={`costs/${trip._id}`}>
                                     Costs
                                 </Link>
