@@ -1,7 +1,7 @@
 # Mates-Rates
 An app to take the hassle out of planning trips with friends.
 
-[Heroku deployment]()
+[Heroku deployment](https://mates-rates.herokuapp.com)
 
 ## Table of Contents
 * [Description](#description)
