@@ -31,6 +31,13 @@ Making use of AWS SNS, the app sends messages to all the invited guests, informi
 
 ## Screenshots
 
+![landing-page](./docs/images/landingPage.jpg)
+![dashboard](./docs/images/dashboard.jpg)
+![plan-trip](./docs/images/planTrip.jpg)
+![itinerary](./docs/images/itinerary.jpg)
+![costs](./docs/images/costs.jpg)
+
+
 
 
 ## Contributions
